@@ -1,0 +1,11 @@
+section {
+  width: 50%;
+  border: 1px solid black;
+}
+div > div {
+  float: left;
+  width: 50%;
+  padding: 5%;
+  /* Ne compte plus le border et le padding dans le calcul de la largeur */
+  box-sizing: border-box;
+}

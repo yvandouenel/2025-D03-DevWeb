@@ -1,0 +1,11 @@
+.float-left {
+  float: left;
+  margin-right: 20px;
+}
+.clear-float {
+  clear: both;
+}
+p {
+  text-align: justify;
+  padding: 0 30px;
+}

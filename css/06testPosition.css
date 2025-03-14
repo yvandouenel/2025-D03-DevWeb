@@ -1,0 +1,21 @@
+img {
+  max-width: 100%;
+}
+
+article {
+  float: left;
+  width: 30%;
+  position: relative;
+
+  margin-right: 20px;
+  p {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+  }
+  img {
+    display: block;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+}

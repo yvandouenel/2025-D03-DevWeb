@@ -1,0 +1,9 @@
+h1 {
+  /* display: none; */
+  /* display: inline; */
+  border: 1px solid black;
+}
+span {
+  /* display: block; */
+  border: 1px solid red;
+}
