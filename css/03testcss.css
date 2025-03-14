@@ -1,0 +1,87 @@
+/* Sélecteur universel */
+* {
+  border: 10px solid grey !important;
+}
+body {
+  border: 5px solid slateblue;
+}
+/* Sélecteurs par balise  */
+h1 {
+  color: red;
+  font-size: 2.5em;
+}
+h2 {
+  color: green;
+  font-size: 2em;
+}
+
+body main {
+  font-size: 1.5rem;
+}
+body main p {
+  color: green;
+}
+body {
+  main {
+    font-size: 1.5rem;
+    p {
+      color: green;
+    }
+  }
+}
+main {
+  border: 3px solid black;
+}
+
+/* Classes (.) avec imbrication */
+.button {
+  border: 1px solid grey;
+  padding: 10px;
+  margin: 3px;
+  border-radius: 8px;
+  display: table;
+  a {
+    text-decoration: none;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
+  &:hover {
+    background-color: aliceblue;
+  }
+  &:before {
+    content: "avant";
+  }
+  &:after {
+    content: "après";
+  }
+}
+
+/* Identité (#) */
+#button-special {
+  border: 1px solid red;
+}
+/* Tableaux */
+table {
+  border-collapse: collapse;
+  tr {
+    margin: 5px 0;
+    border: 1px solid grey;
+  }
+  tr:nth-child(2n + 1) {
+    background-color: #dddddd;
+  }
+  td,
+  th {
+    padding: 20px 5px;
+  }
+}
+/* Sélecteur par attribut avec regexp */
+td[class*="toto"] {
+  border: 10px solid yellowgreen;
+}
+td[class^="icon"] {
+  border: 10px solid burlywood;
+}
+td[class$="toto"] {
+  border: 10px solid gray;
+}
