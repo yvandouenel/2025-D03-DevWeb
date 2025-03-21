@@ -1,0 +1,77 @@
+/* Général */
+svg {
+  opacity: 1;
+}
+/* Header */
+#logo-paris {
+  width: 200px;
+}
+
+.only-lg {
+  display: none;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  #logo-main-nav {
+    display: flex;
+    align-items: center;
+
+    #main-nav {
+      margin-left: 20px;
+      ul {
+        display: flex;
+        gap: 20px;
+        padding: 0;
+        list-style: none;
+        a {
+          text-decoration: none;
+          color: #071f32;
+          font-family: arial;
+          display: block;
+          padding: 10px;
+          border-bottom: 4px solid transparent;
+          &:hover {
+            border-bottom: 4px solid black;
+          }
+          &#todo-paris:hover {
+            border-bottom: 4px solid red;
+          }
+        }
+      }
+    }
+  }
+  #secondary-nav {
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+    ul {
+      display: flex;
+      gap: 20px;
+      padding: 0;
+      list-style: none;
+      a {
+        text-decoration: none;
+        color: #071f32;
+        font-family: arial;
+        display: block;
+        padding: 10px;
+        border-bottom: 4px solid transparent;
+        &:hover {
+          border-bottom: 4px solid black;
+        }
+        &#todo-paris:hover {
+          border-bottom: 4px solid red;
+        }
+      }
+    }
+  }
+}
+/* Media queries - quand l'écran et > ou = à 768px*/
+@media screen and (min-width: 768px) {
+  .only-lg {
+    display: block;
+  }
+}

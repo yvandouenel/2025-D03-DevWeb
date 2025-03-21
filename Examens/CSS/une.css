@@ -1,0 +1,59 @@
+/* Général */
+body {
+  font-family: arial;
+}
+
+/* A la une */
+#one {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  #text-one {
+    z-index: 1;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    position: relative;
+    top: -50px;
+    #tag {
+      display: flex;
+      gap: 15px;
+      order: -1;
+      text-transform: uppercase;
+      span:nth-child(1) {
+        color: #354bcf;
+      }
+      span:nth-child(2) {
+        color: #e22c3f;
+      }
+    }
+    h3 {
+      font-size: 2em;
+      margin-bottom: 0;
+    }
+    p {
+      line-height: 1.5em;
+    }
+  }
+  img {
+    width: 100%;
+    transition: transform 0.5s;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+/* Si l'écran est plus grand 768px */
+@media screen and (min-width: 768px) {
+  #one {
+    /* Largeur de l'élément d'id une fait 35% de son container */
+    width: 35%;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,45 @@
+/* Général */
+body {
+  font-family: arial;
+}
+
+h2,
+h3 {
+  text-align: center;
+  color: #354bcf;
+}
+h2 {
+  font-weight: bold;
+}
+h3 {
+  font-weight: 400;
+}
+/* Formulaire */
+form {
+  margin: 0 auto;
+  padding: 40px;
+  box-sizing: border-box;
+  border: 1px solid #354bcf;
+  input,
+  button {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 6px 0;
+    height: 2em;
+  }
+  input {
+    background-color: #e8e8e8;
+    border: 0;
+  }
+  button {
+    background-color: #e22c3f;
+    color: white;
+    border: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  form {
+    width: 500px;
+  }
+}

@@ -9,3 +9,53 @@ div > div {
   /* Ne compte plus le border et le padding dans le calcul de la largeur */
   box-sizing: border-box;
 }
+img {
+  width: 100%;
+  /* transition: width 2s, transform 3s; */
+}
+/* img:hover {
+  width: 150%;
+  transform: rotate(180deg);
+} */
+.bg {
+  background-color: #ccc;
+}
+.clear-fix {
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+.ws {
+  white-space: nowrap;
+}
+.bs {
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+img {
+  animation-duration: 10s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  25% {
+    font-size: 280%;
+    margin-left: 27%;
+    width: 170%;
+  }
+  75% {
+    font-size: 300%;
+    margin-left: 25%;
+    width: 150%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}

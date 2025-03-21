@@ -1,0 +1,18 @@
+section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* Alignement sur l'axe principal */
+  justify-content: space-between;
+  /* Alignement sur l'axe secondaire */
+  align-items: stretch;
+  /* Alignement sur l'axe secondaire  */
+  align-content: space-around;
+  height: 500px;
+  > div {
+    border: 1px solid black;
+    flex-basis: calc(33.33%);
+    padding: 20px;
+    box-sizing: border-box;
+  }
+}

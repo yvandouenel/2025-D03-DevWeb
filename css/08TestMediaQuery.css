@@ -1,0 +1,25 @@
+body {
+  font-size: 5px;
+}
+/* Mobile first */
+section p {
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+/* Media queries */
+@media screen and (min-width: 780px) {
+  section p {
+    width: calc(50% - 20px);
+    margin: 0 auto;
+  }
+}
+/* Media queries */
+@media screen and (min-width: 1200px) {
+  section p {
+    width: 25%;
+  }
+}
+p {
+  font-size: clamp(14px, 1em, 40px);
+}
