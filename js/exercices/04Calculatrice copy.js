@@ -1,27 +1,27 @@
-// Déclaration des fonctions de calcul
-function add(a, b) {
-  return parseInt(a) + parseInt(b);
-}
-function substract(a, b) {
-  return parseInt(a) - parseInt(b);
-}
-function multiply(a, b) {
-  return parseInt(a) * parseInt(b);
-}
-function division(a, b) {
-  return parseInt(a) / parseInt(b);
-}
+const operation = window.prompt("Quelle opération souhaitez vous faire ? (1 : addition, 2: soustraction, 3 - multiplication, 4 - division, 5 - sortie)");
 
-// Tant que l'utilisateur n'a pas entré 5 à la question de l'opération, 
-// je continue de lui demander quelle opération il veut traiter
-let operation = window.prompt("Quelle opération souhaitez vous faire ? (1 : addition, 2: soustraction, 3 - multiplication, 4 - division, 5 - sortie)");
+console.log(`Vous avez entré pour opération : `, operation);
 
-while (operation != 5) {
+if (operation != 5) {
   const numberOne = window.prompt("Entrez un premier nombre");
   const numberTwo = window.prompt("Entrez un second nombre");
 
   console.log(`Vous avez entré deux nombres : `, numberOne, numberTwo);
 
+  // Il faut créer les 4 fonctions (add, substract, multiply, division) et appeler la bonne fonction suivant l'opération choisie par l'utilisateur 
+
+  function add(a, b) {
+    return parseInt(a) + parseInt(b);
+  }
+  function substract(a, b) {
+    return parseInt(a) - parseInt(b);
+  }
+  function multiply(a, b) {
+    return parseInt(a) * parseInt(b);
+  }
+  function division(a, b) {
+    return parseInt(a) / parseInt(b);
+  }
 
   // appeler la bonne fonction suivant l'opération choisie par l'utilisateur 
   if (operation == 1) {
@@ -51,8 +51,9 @@ while (operation != 5) {
     // Affichage du résultat
     console.log(`Résultat de l'opération`, quotient);
   }
-  // Changement éventuel de la valeur de la variable globale operation
-  operation = window.prompt("Quelle opération souhaitez vous faire ? (1 : addition, 2: soustraction, 3 - multiplication, 4 - division, 5 - sortie)");
 
+} else {
+
+  // Affichage du résultat
+  console.log(`Vous avez demandé à sortir de la calculatrice`);
 }
-console.log(`Vous avez souhaité sortir de la calculatrice`);
