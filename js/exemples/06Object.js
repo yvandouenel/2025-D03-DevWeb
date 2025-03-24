@@ -18,7 +18,7 @@ function Pokemon(name, type, level) {
 
 }
 
-// Création d'une instance de Pokemon
+// Création des instance de Pokemon
 const tadmorv = new Pokemon("Tadmorv", "Poison", 32);
 console.log(`tadmorv`, tadmorv);
 
@@ -26,5 +26,5 @@ const pikachu = new Pokemon("Pikachu", "Electricité", 89);
 
 console.log(`pikachu`, pikachu);
 
-// tadmorv combat pikachu
+// tadmorv combat pikachu via l'appel de la méthode fight
 tadmorv.fight(pikachu);
