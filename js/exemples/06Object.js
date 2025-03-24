@@ -1,21 +1,21 @@
 // Fonction constructeur
-
 function Pokemon(name, type, level) {
   this.name = name;
   this.type = type;
   this.level = level;
 
-  this.fight = function (otherPokemon) {
-    const myPoints = Math.random() * this.level;
-    const otherPokemonPoints = Math.random() * otherPokemon.level;
-    console.log(`Points de ${this.name} : ${myPoints} et points de ${otherPokemon.name}: ${otherPokemonPoints}`);
-    if (myPoints >= otherPokemonPoints) {
-      console.log(`Bravo ` + this.name + ', tu as gagné contre ' + otherPokemon.name);
-    } else {
-      console.log(`Désolé ` + this.name + ', tu as perdu contre ' + otherPokemon.name);
-    }
-  }
+}
 
+// Utilisation du prototype du constructeur
+Pokemon.prototype.fight = function (otherPokemon) {
+  const myPoints = Math.random() * this.level;
+  const otherPokemonPoints = Math.random() * otherPokemon.level;
+  console.log(`Points de ${this.name} : ${myPoints} et points de ${otherPokemon.name}: ${otherPokemonPoints}`);
+  if (myPoints >= otherPokemonPoints) {
+    console.log(`Bravo ` + this.name + ', tu as gagné contre ' + otherPokemon.name);
+  } else {
+    console.log(`Désolé ` + this.name + ', tu as perdu contre ' + otherPokemon.name);
+  }
 }
 
 // Création des instance de Pokemon
