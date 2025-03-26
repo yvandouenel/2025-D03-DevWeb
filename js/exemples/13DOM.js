@@ -46,12 +46,12 @@ h2.innerText = "Titre de niveau 2";
 
 
 // Création d'une section
-const section = createElementInBody("section", "Texte de la section", document.body);
+const section = createCustomElement("section", "Texte de la section", document.body);
 
 // Création d'un paragraphe en tant qu'enfant de la section
-createElementInBody("p", "Lorem ipsum", section);
+createCustomElement("p", "Lorem ipsum", section);
 
-function createElementInBody(elementName, text = "", parent = document.body) {
+function createCustomElement(elementName, text = "", parent = document.body) {
   console.log(`parent`, parent);
   // Créer un élément du DOM
   const element = document.createElement(elementName);
