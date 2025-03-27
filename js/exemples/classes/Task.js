@@ -28,16 +28,25 @@ export default class Task {
 
   handleEvents() {
     this.domElements.buttonDelete.addEventListener("click", (event) => {
-      this.domElements.section.remove();
+      this.delete();
     });
+
+
     this.domElements.buttonValidate.addEventListener("click", (event) => {
-      // Je dois "barrer" le titre qui correspond au nom de la tâche
-      this.domElements.h2.style.textDecoration = "line-through";
+      this.done = !this.done;
+      // Je dois "barrer" le titre qui correspond au nom de la tâche le cas échéant et changer le label du bouton valider
+      if (this.done) {
+        this.domElements.h2.style.textDecoration = "line-through";
+        this.domElements.buttonValidate.innerText = "Invalider";
+      } else {
+        this.domElements.h2.style.textDecoration = "none";
+        this.domElements.buttonValidate.innerText = "Valider";
+      }
     });
 
   }
   delete() {
-    // 
+    this.domElements.section.remove();
   }
   createCustomElement(elementName, text = "", parent = document.body) {
     console.log(`parent`, parent);
