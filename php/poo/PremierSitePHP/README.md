@@ -7,6 +7,7 @@ Création d'un mini site web avec :
 
 # Contexte
 - Site web qui présente des produits
+- Utilisation du serveur de développement fournit par PHP
 
 # Structure du projet à terme
 mon-site/

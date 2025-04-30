@@ -1,0 +1,17 @@
+{
+  "name": "diginamic/first",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Diginamic\\Controllers\\": "src/Controllers",
+      "Diginamic\\Interfaces\\": "src/Interfaces"
+    }
+  },
+  "authors": [
+    {
+      "name": "yvandouenel",
+      "email": "y.douenel@coopernet.fr"
+    }
+  ],
+  "require": {}
+}
