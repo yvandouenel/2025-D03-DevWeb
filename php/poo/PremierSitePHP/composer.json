@@ -4,7 +4,9 @@
   "autoload": {
     "psr-4": {
       "Diginamic\\Controllers\\": "src/Controllers",
-      "Diginamic\\Interfaces\\": "src/Interfaces"
+      "Diginamic\\Interfaces\\": "src/Interfaces",
+      "Diginamic\\Models\\": "src/Models",
+      "Diginamic\\Views\\": "src/Views"
     }
   },
   "authors": [

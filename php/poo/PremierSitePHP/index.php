@@ -3,13 +3,13 @@
 // utilisation de l'autoload
 require_once __DIR__ . "/vendor/autoload.php";
 
-use Diginamic\Controllers\Product;
+use Diginamic\Models\Product;
 
 // Création de la variable $title
 $title = "Présentation de produits";
 
 // Instanciation d'un produit
-$tandem = new Product("VeloDuo");
+$tandem = new Product("VeloDuo", 4800, "Magnifique tandem hollandais", true);
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +24,7 @@ $tandem = new Product("VeloDuo");
 <body>
   <h1><?= $title ?></h1>
   <h2><?= $tandem->getName() ?></h2>
+  <p><?= $tandem->getDescription() ?></p>
 
 </body>
 
