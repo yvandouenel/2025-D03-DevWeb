@@ -1,15 +1,28 @@
 <?php
 
 // utilisation de l'autoload
+
+use Diginamic\Controllers\ProductController;
+
 require_once __DIR__ . "/vendor/autoload.php";
 
-use Diginamic\Models\Product;
+
 
 // Création de la variable $title
 $title = "Présentation de produits";
 
-// Instanciation d'un produit
-$tandem = new Product("VeloDuo", 4800, "Magnifique tandem hollandais", true);
+// Contenu par défaut
+$content = "<p>Bienvenue dans notre nouvelle boutique</p>";
+
+// Récupération des infos provenant de la query string
+if (isset($_GET["controller"])) {
+  if ($_GET["controller"] == "products") {
+    // je vais appeler le contrôleur et sa méthode getAllProducts
+    $productController = new ProductController();
+    $productController->getAllProducts();
+  }
+};
+
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +36,7 @@ $tandem = new Product("VeloDuo", 4800, "Magnifique tandem hollandais", true);
 
 <body>
   <h1><?= $title ?></h1>
-  <h2><?= $tandem->getName() ?></h2>
-  <p><?= $tandem->getDescription() ?></p>
+  <?= $content ?>
 
 </body>
 
