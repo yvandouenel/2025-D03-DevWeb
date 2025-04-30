@@ -15,5 +15,7 @@
       "email": "y.douenel@coopernet.fr"
     }
   ],
-  "require": {}
+  "require": {
+    "symfony/var-dumper": "^7.2"
+  }
 }
