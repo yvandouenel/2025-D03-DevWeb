@@ -54,6 +54,10 @@ class FirstController
       $html .= '        <label for="firstname">Prénom :</label>';
       $html .= '        <input type="text" id="firstname" name="firstname" required>';
       $html .= '    </div>';
+      $html .= '    <div>';
+      $html .= '        <label for="lastname">Nom :</label>';
+      $html .= '        <input type="text" id="lastname" name="lastname" required>';
+      $html .= '    </div>';
       $html .= '    <div style="margin-top: 10px;">';
       $html .= '        <button type="submit">Envoyer</button>';
       $html .= '    </div>';

@@ -39,5 +39,22 @@ return [
     "params" => [
       "id" => "[0-9]+"  // Expression régulière pour s'assurer que l'ID est un nombre
     ]
-  ]
+  ],
+  [
+    "path" => '/about',
+    "controller" => 'Diginamic\Framework\Controller\AboutController',
+    "controllerMethod" => 'testAbout',
+    "httpMethod" => 'GET',
+    "params" => []
+  ],
+  [
+    "path" => '/products/{id}/{name}',
+    "controller" => 'Diginamic\Framework\Controller\ProductController',
+    "controllerMethod" => 'displayOneProduct',
+    "httpMethod" => 'GET',
+    "params" => [
+      "id" => "[0-9]+",  // Expression régulière pour s'assurer que l'ID est un nombre (au moins un)
+      "name" => "[a-z]+",
+    ]
+  ],
 ];
