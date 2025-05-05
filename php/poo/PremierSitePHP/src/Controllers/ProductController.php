@@ -3,6 +3,7 @@
 namespace Diginamic\Controllers;
 
 use Diginamic\Models\Product;
+use Diginamic\Views\ProductView;
 
 class ProductController
 {
@@ -17,7 +18,15 @@ class ProductController
     $this->products[] = new Product("2", "Canapé pliable", 620, "Canapé convertible en cuir", true);
     $this->products[] = new Product("3", "Trotinette volante", 666875588520, "La meilleure sur le marché", true);
   }
+  public function displayAllProducts()
+  {
+    // Récupération des données en appelant la méthode getAllProducts
+    $products = $this->getAllProducts();
+    // je vais créer la vue appeler sa méthode displayProducts
+    $productView = new ProductView();
 
+    return $productView->displayProducts($products);
+  }
   // méthode pour récupérer tous les produits
   public function getAllProducts()
   {

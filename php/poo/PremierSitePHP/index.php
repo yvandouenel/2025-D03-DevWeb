@@ -18,12 +18,9 @@ $content = "<p>Bienvenue dans notre nouvelle boutique</p>";
 // Récupération des infos provenant de la query string
 if (isset($_GET["controller"])) {
   if ($_GET["controller"] == "products") {
-    // je vais créer le contrôleur et appeler sa méthode getAllProducts
+    // je vais créer le contrôleur et appeler sa méthode displayAllProducts
     $productController = new ProductController();
-    $products = $productController->getAllProducts();
-    // je vais créer la vue appeler sa méthode displayProducts
-    $productView = new ProductView();
-    $content = $productView->displayProducts($products);
+    $content = $productController->displayAllProducts();
   }
 };
 
