@@ -1,0 +1,19 @@
+{
+    "name": "diginamic/framework",
+    "description": "Exemple de requête et de réponse dans le cadre de PSR7",
+    "type": "project",
+    "require": {
+        "guzzlehttp/guzzle": "^7.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Diginamic\\Framework\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yvandouenel",
+            "email": "y.douenel@coopernet.fr"
+        }
+    ]
+}
