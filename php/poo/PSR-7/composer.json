@@ -1,0 +1,19 @@
+{
+    "name": "diginamic/psr7",
+    "description": "Test de l'implémentation de PSR7",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Diginamic\\Psr7\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yvandouenel",
+            "email": "y.douenel@coopernet.fr"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.9"
+    }
+}
