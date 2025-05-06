@@ -106,11 +106,25 @@ class Book
   // Sauvegarder les modifications dans le fichier
   private static function saveBooks($books)
   {
-    // Dans un environnement réel, nous écririons dans le fichier
-    // Pour cet exercice, nous stockons simplement en mémoire
-    self::$books = $books;
+    // Formatage du contenu du fichier
+    $content = "<?php\n// src/Data/books.php\n\nreturn " . var_export($books, true) . ";\n";
 
-    // Note : Dans un vrai projet, vous pourriez ajouter du code comme :
-    // file_put_contents(__DIR__ . '/../Data/books.php', '<?php return ' . var_export($books, true) . ';');
+    // Écriture dans le fichier
+    $filePath = __DIR__ . '/../Data/books.php';
+
+    // Vérification que le répertoire existe
+    $directory = dirname($filePath);
+    if (!is_dir($directory)) {
+      mkdir($directory, 0755, true);
+    }
+
+    // Sauvegarde dans le fichier
+    if (file_put_contents($filePath, $content) !== false) {
+      // Mise à jour de la variable statique en mémoire
+      self::$books = $books;
+      return true;
+    }
+
+    return false;
   }
 }

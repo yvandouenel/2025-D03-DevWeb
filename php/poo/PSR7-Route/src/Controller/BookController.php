@@ -45,6 +45,25 @@ class BookController
 
     // Doit renvoyer les livres au format json
   }
+  public function postOne(ServerRequestInterface $request): ResponseInterface
+  {
+    // Récupérer les données envoyées par la requête 
+    $newBook = $request->getBody()->getContents();
+
+    // Il faut m'assurer que les données envoyées par la requête http (post) soit transformée en tableau associatif
+
+    $bookArray = json_decode($newBook, true);
+
+    // Ajout du nouveau livre en utlisant le Modèle
+    $addedBook = Book::add($bookArray);
+
+    // Renvoie d'une réponse au format json
+    return $this->createJsonResponse([
+      'success' => true,
+      'message' => 'post fait',
+      'data' => $addedBook
+    ], 200);
+  }
   /**
    * Crée une réponse JSON
    */

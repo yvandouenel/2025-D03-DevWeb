@@ -87,4 +87,11 @@ return [
       "id" => "[0-9]+",  // Expression régulière pour s'assurer que l'ID est un nombre (au moins un)
     ]
   ],
+  [
+    "path" => '/api/books/',
+    "controller" => 'Diginamic\Framework\Controller\BookController',
+    "controllerMethod" => 'postOne',
+    "httpMethod" => 'POST',
+    "params" => []
+  ],
 ];
