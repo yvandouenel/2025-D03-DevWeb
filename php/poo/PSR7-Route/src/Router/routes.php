@@ -88,7 +88,7 @@ return [
     ]
   ],
   [
-    "path" => '/api/books/',
+    "path" => '/api/books',
     "controller" => 'Diginamic\Framework\Controller\BookController',
     "controllerMethod" => 'postOne',
     "httpMethod" => 'POST',

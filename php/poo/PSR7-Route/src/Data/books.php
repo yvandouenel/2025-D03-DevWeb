@@ -50,4 +50,12 @@ return array (
     'genre' => 'Histoire',
     'id' => 6,
   ),
+  6 => 
+  array (
+    'title' => 'La tresse',
+    'author' => 'Xavier Cercas',
+    'year' => 2015,
+    'genre' => 'Histoire',
+    'id' => 7,
+  ),
 );
