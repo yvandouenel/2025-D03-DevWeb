@@ -71,4 +71,11 @@ return [
     "httpMethod" => 'PATCH',
     "params" => []
   ],
+  [
+    "path" => '/api/books',
+    "controller" => 'Diginamic\Framework\Controller\BookController',
+    "controllerMethod" => 'getAll',
+    "httpMethod" => 'GET',
+    "params" => []
+  ],
 ];
