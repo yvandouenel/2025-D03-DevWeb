@@ -20,8 +20,27 @@ class BookController
 
     return $this->createJsonResponse([
       'success' => true,
-      'message' => 'Livre récupérés avec succès',
+      'message' => 'Livres récupérés avec succès',
       'data' => $books
+    ]);
+
+    // Doit renvoyer les livres au format json
+  }
+  public function getOne(ServerRequestInterface $request, array $routeParams): ResponseInterface
+  {
+
+    $numBook = $routeParams["id"];
+    // C'est la reponsabilité du contrôleur d'aller chercher les données 
+    // En utilisant le modèle
+    // Puis d'afficher en utilisant la vue
+    // Utilisation de Book (le modèle) avec ces classes statiques
+    $book = Book::getById($numBook);
+
+
+    return $this->createJsonResponse([
+      'success' => true,
+      'message' => 'Livre récupéré avec succès',
+      'data' => $book
     ]);
 
     // Doit renvoyer les livres au format json

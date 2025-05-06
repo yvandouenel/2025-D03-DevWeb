@@ -78,4 +78,13 @@ return [
     "httpMethod" => 'GET',
     "params" => []
   ],
+  [
+    "path" => '/api/books/{id}',
+    "controller" => 'Diginamic\Framework\Controller\BookController',
+    "controllerMethod" => 'getOne',
+    "httpMethod" => 'GET',
+    "params" => [
+      "id" => "[0-9]+",  // Expression régulière pour s'assurer que l'ID est un nombre (au moins un)
+    ]
+  ],
 ];
