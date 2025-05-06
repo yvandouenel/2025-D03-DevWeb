@@ -253,7 +253,7 @@ class FirstController
 
     document.getElementById('updateForm').addEventListener('submit', function(event) {
       event.preventDefault();
-      
+      console.log(`Validation du formulaire`);
       const id = document.getElementById('resourceId').value;
       const name = document.getElementById('name').value;
       const description = document.getElementById('description').value;

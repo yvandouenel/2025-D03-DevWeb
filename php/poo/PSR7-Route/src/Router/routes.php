@@ -57,4 +57,18 @@ return [
       "name" => "[a-z]+",
     ]
   ],
+  [
+    "path" => '/test-patch',
+    "controller" => 'Diginamic\Framework\Controller\PatchController',
+    "controllerMethod" => 'testPatch',
+    "httpMethod" => 'GET',
+    "params" => []
+  ],
+  [
+    "path" => '/test-patch',
+    "controller" => 'Diginamic\Framework\Controller\PatchController',
+    "controllerMethod" => 'testPatch',
+    "httpMethod" => 'PATCH',
+    "params" => []
+  ],
 ];
