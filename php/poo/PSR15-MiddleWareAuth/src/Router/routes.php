@@ -7,6 +7,7 @@ use Diginamic\Framework\Controller\ContactController;
 use Diginamic\Framework\Controller\LoginController;
 use Diginamic\Framework\Controller\TestController;
 use Diginamic\Framework\Middleware\AuthMiddleware;
+use Diginamic\Framework\Middleware\TimeMiddleware;
 
 /**
  * Fichier de configuration des routes
@@ -27,8 +28,7 @@ return [
     'httpMethod' => 'GET',
     'params' => [],
     'middlewares' => [
-      // Vous pouvez ajouter des middlewares spécifiques à cette route
-      // new LoggingMiddleware(),
+      new TimeMiddleware()
     ]
   ],
   [

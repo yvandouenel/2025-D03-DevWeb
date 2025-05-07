@@ -49,7 +49,7 @@ class LoginController
     $html = "<h1>Identification réussie</h1>";
     $html .= '<p>';
     $html .= '    votre login : ' . $login;
-    $html .= '    <a href="/logout">Déconnexion</a>: ';
+    $html .= '    <a href="/logout">Déconnexion</a> ';
     $html .= '</p>';
 
     // Création et renvoi de la réponse

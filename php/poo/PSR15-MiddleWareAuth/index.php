@@ -8,6 +8,7 @@ use Diginamic\Framework\Exception\RouteNotFoundException;
 use Diginamic\Framework\Middleware\MiddlewareHandler;
 use Diginamic\Framework\Middleware\AuthMiddleware;
 use Diginamic\Framework\Middleware\InputSanitizerMiddleware;
+use Diginamic\Framework\Middleware\TimeMiddleware;
 use GuzzleHttp\Psr7\ServerRequest;
 use GuzzleHttp\Psr7\Response;
 
@@ -25,6 +26,7 @@ $router = new Router();
   // Ajoutez ici d'autres routes protégées
 ]); 
 $router->addMiddleware($authMiddleware);*/
+
 
 // Après le middleware d'authentification
 
