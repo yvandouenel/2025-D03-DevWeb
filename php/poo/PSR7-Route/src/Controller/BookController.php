@@ -64,6 +64,40 @@ class BookController
       'data' => $addedBook
     ], 200);
   }
+  public function deleteOne(ServerRequestInterface $request, array $routeParams): ResponseInterface
+  {
+    // Récupération de l'id via le tableau $routeParams
+    $id = $routeParams["id"];
+    // Suppression du livre en utlisant le Modèle
+    $bookDeleted = Book::delete($id);
+
+    // Renvoie d'une réponse au format json
+    return $this->createJsonResponse([
+      'success' => $bookDeleted,
+      'message' => 'suppression faite'
+    ], 200);
+  }
+  public function putOne(ServerRequestInterface $request, array $routeParams): ResponseInterface
+  {
+    // Récupérer les données envoyées par la requête 
+    $bookToUpdate = $request->getBody()->getContents();
+
+    // Il faut m'assurer que les données envoyées par la requête http (post) soit transformée en tableau associatif
+
+    $bookArray = json_decode($bookToUpdate, true);
+
+    // Récupération de l'id via le tableau $routeParams
+    $id = $routeParams["id"];
+    // Suppression du livre en utlisant le Modèle
+    $updatedBook = Book::update($id, $bookArray);
+
+    // Renvoie d'une réponse au format json
+    return $this->createJsonResponse([
+      'success' => true,
+      'message' => 'modification faite',
+      'updatedBook' => $updatedBook
+    ], 200);
+  }
   /**
    * Crée une réponse JSON
    */

@@ -94,4 +94,22 @@ return [
     "httpMethod" => 'POST',
     "params" => []
   ],
+  [
+    "path" => '/api/books/{id}',
+    "controller" => 'Diginamic\Framework\Controller\BookController',
+    "controllerMethod" => 'deleteOne',
+    "httpMethod" => 'DELETE',
+    "params" => [
+      "id" => "[0-9]+",  // Expression régulière pour s'assurer que l'ID est un nombre (au moins un)
+    ]
+  ],
+  [
+    "path" => '/api/books/{id}',
+    "controller" => 'Diginamic\Framework\Controller\BookController',
+    "controllerMethod" => 'putOne',
+    "httpMethod" => 'PUT',
+    "params" => [
+      "id" => "[0-9]+",  // Expression régulière pour s'assurer que l'ID est un nombre (au moins un)
+    ]
+  ],
 ];

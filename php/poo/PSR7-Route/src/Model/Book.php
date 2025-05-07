@@ -56,8 +56,14 @@ class Book
     return $book;
   }
 
-  // Mettre à jour un livre existant
-  public static function update($id, $updatedBook)
+  /**
+   * Mettre à jour un livre existant : à partir de l'id du livre et des données à modifier, appelle saveBooks
+   *
+   * @param integer $id
+   * @param array $updatedBook
+   * @return $updatedBook ou null
+   */
+  public static function update(int $id, array $updatedBook)
   {
     $books = self::loadBooks();
     $found = false;
@@ -103,7 +109,12 @@ class Book
     return false;
   }
 
-  // Sauvegarder les modifications dans le fichier
+  /**
+   * récupère un tableau en paramètre et l'écrit dans le fichier src/Data/books.php
+   *
+   * @param array $books
+   * @return boolean (vrai si le fichier a été réécrit, faux sinon)
+   */
   private static function saveBooks($books)
   {
     // Formatage du contenu du fichier

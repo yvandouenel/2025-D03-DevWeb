@@ -20,21 +20,13 @@ return array (
   ),
   2 => 
   array (
-    'id' => 3,
-    'title' => 'Dune',
-    'author' => 'Frank Herbert',
-    'year' => 1965,
-    'genre' => 'Science-fiction',
-  ),
-  3 => 
-  array (
     'id' => 4,
     'title' => 'Les Misérables',
     'author' => 'Victor Hugo',
     'year' => 1862,
     'genre' => 'Roman historique',
   ),
-  4 => 
+  3 => 
   array (
     'id' => 5,
     'title' => 'Le Seigneur des Anneaux',
@@ -42,20 +34,12 @@ return array (
     'year' => 1954,
     'genre' => 'Fantasy',
   ),
-  5 => 
+  4 => 
   array (
     'title' => 'L\'imposteur',
     'author' => 'Xavier Cercas',
     'year' => 2015,
-    'genre' => 'Histoire',
+    'genre' => 'Essai',
     'id' => 6,
-  ),
-  6 => 
-  array (
-    'title' => 'La tresse',
-    'author' => 'Xavier Cercas',
-    'year' => 2015,
-    'genre' => 'Histoire',
-    'id' => 7,
   ),
 );
