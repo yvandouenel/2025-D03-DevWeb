@@ -18,13 +18,13 @@ $router = new Router();
 
 // Ajout d'un middleware global d'authentification
 // Avec la liste des routes protégées
-$authMiddleware = new AuthMiddleware([
+/* $authMiddleware = new AuthMiddleware([
   '/admin',
   '/profile',
   '/login-post',
   // Ajoutez ici d'autres routes protégées
-]);
-$router->addMiddleware($authMiddleware);
+]); 
+$router->addMiddleware($authMiddleware);*/
 
 // Après le middleware d'authentification
 

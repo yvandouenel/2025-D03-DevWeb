@@ -5,6 +5,8 @@ use Diginamic\Framework\Controller\FirstController;
 use Diginamic\Framework\Controller\AdminController;
 use Diginamic\Framework\Controller\ContactController;
 use Diginamic\Framework\Controller\LoginController;
+use Diginamic\Framework\Controller\TestController;
+use Diginamic\Framework\Middleware\AuthMiddleware;
 
 /**
  * Fichier de configuration des routes
@@ -44,7 +46,7 @@ return [
     'httpMethod' => 'GET',
     'params' => [],
     'middlewares' => [
-      // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
+      new AuthMiddleware(['/admin'])
     ]
   ],
   [
@@ -55,7 +57,9 @@ return [
     'params' => [
       'id' => '\d+' // Le paramètre id doit être un nombre
     ],
-    'middlewares' => []
+    'middlewares' => [
+      new AuthMiddleware(['/profile'])
+    ]
   ],
   [
     'path' => '/contact',
@@ -83,9 +87,7 @@ return [
     'controllerMethod' => 'contactSuccess',
     'httpMethod' => 'GET',
     'params' => [],
-    'middlewares' => [
-      // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
-    ]
+    'middlewares' => []
   ],
   [
     'path' => '/login',
@@ -93,9 +95,7 @@ return [
     'controllerMethod' => 'index',
     'httpMethod' => 'GET',
     'params' => [],
-    'middlewares' => [
-      // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
-    ]
+    'middlewares' => []
   ],
   [
     'path' => '/login-post',
@@ -104,7 +104,17 @@ return [
     'httpMethod' => 'POST',
     'params' => [],
     'middlewares' => [
-      // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
+      new AuthMiddleware(['/login-post'])
+    ]
+  ],
+  [
+    'path' => '/testauth',
+    'controller' => TestController::class,
+    'controllerMethod' => 'test',
+    'httpMethod' => 'GET',
+    'params' => [],
+    'middlewares' => [
+      new AuthMiddleware(['/testauth'])
     ]
   ],
 ];
