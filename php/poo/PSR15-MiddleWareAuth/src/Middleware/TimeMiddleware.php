@@ -8,6 +8,12 @@ use GuzzleHttp\Psr7\Response;
 
 class TimeMiddleware implements MiddlewareInterface
 {
+  private string $name;
+
+  public function __construct(string $name)
+  {
+    $this->name = $name;
+  }
   /**
    * Process the request through the middleware
    *
@@ -26,7 +32,7 @@ class TimeMiddleware implements MiddlewareInterface
 
     // Maintenant que j'ai la réponse, je peux la modifier en calculant le temps entre la phase aller de l'architecture oignon et la phase retour
     $executionTime = microtime(true) - $startTime;
-    $response = $response->withHeader('X-Execution-Time', $executionTime);
+    $response = $response->withHeader('X-Execution-Time-' . $this->name, $executionTime);
 
     // Renvoie la réponse modifiée
     return $response;

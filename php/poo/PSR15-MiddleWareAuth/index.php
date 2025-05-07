@@ -27,6 +27,11 @@ $router = new Router();
 ]); 
 $router->addMiddleware($authMiddleware);*/
 
+// Ajout ici d'un middleware sur toutes les routes.
+$timeMiddleware = new TimeMiddleware("first");
+
+$router->addMiddleware($timeMiddleware);
+
 
 // Après le middleware d'authentification
 

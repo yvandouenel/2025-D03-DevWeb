@@ -28,7 +28,7 @@ return [
     'httpMethod' => 'GET',
     'params' => [],
     'middlewares' => [
-      new TimeMiddleware()
+      new TimeMiddleware("last")
     ]
   ],
   [
