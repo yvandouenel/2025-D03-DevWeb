@@ -5,7 +5,7 @@ composer install
 ```
 # Exécuter le code 
 se placer dans le répertoire contenant index.php et lancer 
-  ```bash php -S localhost:3000```
+  ```php -S localhost:3000```
 
 # Explications
 Cet exemple a pour but de montrer :

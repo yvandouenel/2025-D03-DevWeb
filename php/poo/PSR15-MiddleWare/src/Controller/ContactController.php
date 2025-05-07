@@ -50,10 +50,15 @@ class ContactController
     // Traitement des données (envoi d'email, sauvegarde en base de données, etc.)
 
     // Redirection ou affichage d'une page de confirmation
-    return new Response(
+    /*  return new Response(
       302,
       ['Location' => '/contact-success'],
       null
+    ); */
+    return new Response(
+      200,
+      ['Content-Type' => 'text/html'],
+      '<h1>Page d\'accueil</h1>' . "message = $message"
     );
   }
   public function contactSuccess(ServerRequestInterface $request): ResponseInterface

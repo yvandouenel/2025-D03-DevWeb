@@ -13,6 +13,7 @@ use GuzzleHttp\Psr7\Response;
 
 // Démarrer la session si vous utilisez les sessions pour l'authentification
 session_start();
+$_SESSION['user_id'] = "test";
 
 $router = new Router();
 
@@ -30,6 +31,7 @@ $router->addMiddleware($authMiddleware);
 // Ajout d'un middleware global pour la sécurisation des entrées
 $inputSanitizerMiddleware = new InputSanitizerMiddleware([
   'strip_tags' => true,
+  'escape_sql' => true,
   'allow_html' => ['p', 'strong', 'em'], // Balises HTML autorisées, si nécessaire
   'excluded_keys' => ['password', 'csrf_token'], // Clés à exclure du nettoyage
   'excluded_routes' => ['/api/webhook'] // Routes à exclure si nécessaire

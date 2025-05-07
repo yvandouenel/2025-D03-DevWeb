@@ -66,19 +66,18 @@ class AuthMiddleware implements MiddlewareInterface
     error_log("DANS isAuthenticated DE AUTHMIDDLEWARE");
     // À implémenter selon votre système d'authentification
     // Par exemple :
-
-    // Vérification via session PHP
-    // if (isset($_SESSION['user_id'])) {
-    //     return true;
-    // }
+    var_dump($_SESSION);
+    //Vérification via session PHP
+    if (isset($_SESSION['user_id'])) {
+      return true;
+    }
 
     // Ou vérification via token JWT dans l'en-tête Authorization
     // $token = $request->getHeaderLine('Authorization');
     // return $this->validateToken($token);
 
-    // Pour l'instant, retournons false par défaut
+
     return false;
-    //return true;
   }
 
   /**
