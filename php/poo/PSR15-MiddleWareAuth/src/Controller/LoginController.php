@@ -49,7 +49,27 @@ class LoginController
     $html = "<h1>Identification réussie</h1>";
     $html .= '<p>';
     $html .= '    votre login : ' . $login;
+    $html .= '    <a href="/logout">Déconnexion</a>: ';
     $html .= '</p>';
+
+    // Création et renvoi de la réponse
+    return new Response(
+      200,
+      ['Content-Type' => 'text/html; charset=utf-8'],
+      $html
+    );
+  }
+  public function logout(ServerRequestInterface $request): ResponseInterface
+  {
+    // Assignation à false de la clé user_authenticated de la session
+    //$_SESSION['user_authenticated'] = false;
+
+    // suppression de la session
+    session_destroy();
+
+
+    $html = "<h1>Vous n'êtes plus identifé</h1>";
+
 
     // Création et renvoi de la réponse
     return new Response(

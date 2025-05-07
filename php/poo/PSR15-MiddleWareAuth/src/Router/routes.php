@@ -117,4 +117,14 @@ return [
       new AuthMiddleware(['/testauth'])
     ]
   ],
+  [
+    'path' => '/logout',
+    'controller' => LoginController::class,
+    'controllerMethod' => 'logout',
+    'httpMethod' => 'GET',
+    'params' => [],
+    'middlewares' => [
+      new AuthMiddleware(['/logout'])
+    ]
+  ],
 ];

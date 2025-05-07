@@ -13,7 +13,7 @@ class AdminController
     return new Response(
       200,
       ['Content-Type' => 'text/html'],
-      '<h1>Page d\'administration</h1>'
+      '<h1>Page d\'administration</h1>' . '<a href="/logout">Déconnexion</a> '
     );
   }
 }
