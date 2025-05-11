@@ -1,0 +1,15 @@
+{
+    "name": "diginamic/user-management",
+    "autoload": {
+        "psr-4": {
+            "Diginamic\\UserManagement\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yvandouenel",
+            "email": "yvandouenel@gmail.com"
+        }
+    ],
+    "require": {}
+}
