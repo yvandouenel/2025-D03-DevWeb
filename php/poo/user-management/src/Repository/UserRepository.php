@@ -8,7 +8,7 @@ use PDO;
 class UserRepository extends AbstractRepository
 {
     protected string $table = 'users';
-    protected string $entityClass = 'Diginamic\\UserManagement\\Model\\User';
+    protected string $entityClass = User::class;
 
     public function findByUsername(string $username): ?User
     {
