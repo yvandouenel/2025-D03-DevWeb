@@ -9,14 +9,19 @@ use GuzzleHttp\Psr7\Response;
 
 class UserController
 {
+  // Attribut 
+  private $userRepository;
+
+  public function __construct()
+  {
+    $this->userRepository = new UserRepository();
+  }
   public function findAll(ServerRequestInterface $request): ResponseInterface
   {
 
-    // Connexion à la couche data via le repository
-    $userRepository = new UserRepository();
 
     // Récupération des utilisateurs
-    $users = $userRepository->findAll();
+    $users = $this->userRepository->findAll();
 
     $html = '<ul>';
 
