@@ -5,6 +5,7 @@ use Diginamic\Framework\Controller\FirstController;
 use Diginamic\Framework\Controller\AdminController;
 use Diginamic\Framework\Controller\ContactController;
 use Diginamic\Framework\Controller\LoginController;
+use Diginamic\Framework\Controller\UserController;
 
 /**
  * Fichier de configuration des routes
@@ -102,6 +103,16 @@ return [
     'controller' => LoginController::class,
     'controllerMethod' => 'submitLogin',
     'httpMethod' => 'POST',
+    'params' => [],
+    'middlewares' => [
+      // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
+    ]
+  ],
+  [
+    'path' => '/users',
+    'controller' => UserController::class,
+    'controllerMethod' => 'findAll',
+    'httpMethod' => 'GET',
     'params' => [],
     'middlewares' => [
       // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
