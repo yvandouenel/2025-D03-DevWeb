@@ -21,7 +21,7 @@ class UserController
   {
 
 
-    // Récupération des utilisateurs
+    // Récupération des utilisateurs de type Model\User
     $users = $this->userRepository->findAll();
 
     $html = '<ul>';
@@ -29,6 +29,9 @@ class UserController
     // Parcours des utilisateurs
     foreach ($users as $user) {
       $html .= "<li>$user->login</li>";
+      $html .= "<li>$user->password</li>";
+      $html .= "<li>$user->email</li>";
+      $html .= "<li>$user->createdAt</li>";
     }
 
     $html .= '</ul>';
