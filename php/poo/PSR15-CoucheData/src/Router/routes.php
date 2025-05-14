@@ -118,4 +118,14 @@ return [
       // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
     ]
   ],
+  [
+    'path' => '/users',
+    'controller' => UserController::class,
+    'controllerMethod' => 'add',
+    'httpMethod' => 'POST',
+    'params' => [],
+    'middlewares' => [
+      // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
+    ]
+  ],
 ];

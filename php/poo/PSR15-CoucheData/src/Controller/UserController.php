@@ -2,6 +2,7 @@
 
 namespace Diginamic\Framework\Controller;
 
+use Diginamic\Framework\Model\User;
 use Diginamic\Framework\Repository\UserRepository;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -40,6 +41,33 @@ class UserController
       200,
       ['Content-Type' => 'text/html'],
       '<h1>Utilisateurs </h1>' . $html
+    );
+  }
+  public function add(ServerRequestInterface $request): ResponseInterface
+  {
+    // Récupération des données du formulaire dans le cadre du PSR-7 qui utilise les objets request et response
+    $data = $request->getParsedBody();
+    var_dump($data);
+
+    // Création de l'entité User
+    $userEntity = new User();
+
+    // Hydratation de l'utilisation
+    $userEntity->hydrate($data);
+
+    var_dump($userEntity);
+
+    // Appel au modèle ou au repository
+    $this->userRepository->save($userEntity);
+
+
+
+    // Utilisation des méthodes de UserRepository()
+
+    return new Response(
+      200,
+      ['Content-Type' => 'text/html'],
+      '<h1>Utilisateur enregistré </h1>'
     );
   }
 }
