@@ -10,6 +10,16 @@ class UserRepository extends AbstractRepository
   protected string $table = 'users';
   protected string $entityClass = User::class;
 
+  public function findAll(): array
+  {
+    $stmt = $this->db->query("SELECT * FROM {$this->table}");
+    $dataFromDB = $stmt->fetchAll(PDO::FETCH_CLASS, $this->entityClass);
+
+    // Création et hydratation des instances de User (au sens Model\User)
+
+    // Renvoie du tableau de User 
+
+  }
   /**
    * Trouver un utilisateur par son login
    */
