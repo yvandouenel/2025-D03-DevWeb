@@ -139,5 +139,21 @@ return [
       new AuthMiddleware(['/users/add'])
     ]
   ],
+  [
+    'path' => '/users/{id}',
+    'controller' => UserController::class,
+    'controllerMethod' => 'displayFormEdit',
+    'httpMethod' => 'GET',
+    'params' => ['id' => '\d+'],
+    'middlewares' => []
+  ],
+  [
+    'path' => '/users/update/{id}',
+    'controller' => UserController::class,
+    'controllerMethod' => 'edit',
+    'httpMethod' => 'POST',
+    'params' => ['id' => '\d+'],
+    'middlewares' => []
+  ],
 
 ];
