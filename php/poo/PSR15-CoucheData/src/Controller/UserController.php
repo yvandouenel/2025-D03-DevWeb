@@ -24,25 +24,9 @@ class UserController
     // Récupération des utilisateurs de type Model\User car c'est le repository (ici AbstractRepository) qui fait la 
     // correspondance (mapping) entre la base de données et le "Model" objet.
 
-    $html = '<form method="post" action="/users">';
-    $html .= '    <div>';
-    $html .= '        <label for="login">Login :</label>';
-    $html .= '        <input type="text" id="login" name="login" required>';
-    $html .= '    </div>';
-    $html .= '    <div>';
-    $html .= '        <label for="password">Password :</label>';
-    $html .= '        <input type="password" id="password" name="password" required>';
-    $html .= '    </div>';
-    $html .= '    <div>';
-    $html .= '        <label for="email">Email :</label>';
-    $html .= '        <input type="email" id="email" name="email" required>';
-    $html .= '    </div>';
-    $html .= '    <div style="margin-top: 10px;">';
-    $html .= '        <button type="submit">Create</button>';
-    $html .= '    </div>';
-    $html .= '</form>';
 
-    $html .= '<ul>';
+
+    $html = '<ul>';
 
     $users = $this->userRepository->findAll();
 
@@ -66,6 +50,33 @@ class UserController
       '<h1>Utilisateurs </h1>' . $html
     );
   }
+  public function displayAddForm(ServerRequestInterface $request): ResponseInterface
+  {
+    $html = '<form method="post" action="/users/add">';
+    $html .= '    <div>';
+    $html .= '        <label for="login">Login :</label>';
+    $html .= '        <input type="text" id="login" name="login" required>';
+    $html .= '    </div>';
+    $html .= '    <div>';
+    $html .= '        <label for="password">Password :</label>';
+    $html .= '        <input type="password" id="password" name="password" required>';
+    $html .= '    </div>';
+    $html .= '    <div>';
+    $html .= '        <label for="email">Email :</label>';
+    $html .= '        <input type="email" id="email" name="email" required>';
+    $html .= '    </div>';
+    $html .= '    <div style="margin-top: 10px;">';
+    $html .= '        <button type="submit">Create</button>';
+    $html .= '    </div>';
+    $html .= '</form>';
+
+    return new Response(
+      200,
+      ['Content-Type' => 'text/html'],
+      '<h1>Ajout d\'un utilisateur </h1>' . $html
+    );
+  }
+
   public function add(ServerRequestInterface $request): ResponseInterface
   {
     // Récupération des données du formulaire dans le cadre du PSR-7 qui utilise les objets request et response

@@ -6,6 +6,7 @@ use Diginamic\Framework\Controller\AdminController;
 use Diginamic\Framework\Controller\ContactController;
 use Diginamic\Framework\Controller\LoginController;
 use Diginamic\Framework\Controller\UserController;
+use Diginamic\Framework\Middleware\AuthMiddleware;
 
 /**
  * Fichier de configuration des routes
@@ -119,13 +120,23 @@ return [
     ]
   ],
   [
-    'path' => '/users',
+    'path' => '/users/add',
+    'controller' => UserController::class,
+    'controllerMethod' => 'displayAddForm',
+    'httpMethod' => 'GET',
+    'params' => [],
+    'middlewares' => [
+      new AuthMiddleware(['/users/add'])
+    ]
+  ],
+  [
+    'path' => '/users/add',
     'controller' => UserController::class,
     'controllerMethod' => 'add',
     'httpMethod' => 'POST',
     'params' => [],
     'middlewares' => [
-      // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
+      new AuthMiddleware(['/users/add'])
     ]
   ],
 
