@@ -10,16 +10,7 @@ class UserRepository extends AbstractRepository
   protected string $table = 'users';
   protected string $entityClass = User::class;
 
-  public function findAll(): array
-  {
-    $stmt = $this->db->query("SELECT * FROM {$this->table}");
-    $dataFromDB = $stmt->fetchAll(PDO::FETCH_CLASS, $this->entityClass);
 
-    // Création et hydratation des instances de User (au sens Model\User)
-
-    // Renvoie du tableau de User 
-
-  }
   /**
    * Trouver un utilisateur par son login
    */
@@ -27,6 +18,8 @@ class UserRepository extends AbstractRepository
   {
     $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE login = :login LIMIT 1");
     $stmt->execute(['login' => $login]);
+
+
     $stmt->setFetchMode(PDO::FETCH_CLASS, $this->entityClass);
 
     $user = $stmt->fetch();

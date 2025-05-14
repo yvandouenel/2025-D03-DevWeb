@@ -31,6 +31,12 @@ abstract class AbstractRepository implements RepositoryInterface
   public function findAll(): array
   {
     $stmt = $this->db->query("SELECT * FROM {$this->table}");
+
+    // La méthode fetchAll fait automatiquement le lien entre les données de la base de données et l'entité "objet" $this->entityClass
+    // Cela veut dire que les instances du modèle (User par exemple) seront bien instanciées.
+    // Attention cependant, PDO n'est pas un vrai ORM et il n'est pas capable de transformer, par exemple, 
+    // le champ created_at en attribut createdAt
+    // Il va falloir utiliser la fonction magique __set pour pallier ce manque
     return $stmt->fetchAll(PDO::FETCH_CLASS, $this->entityClass);
   }
 
