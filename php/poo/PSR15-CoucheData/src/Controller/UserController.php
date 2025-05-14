@@ -23,9 +23,28 @@ class UserController
 
     // Récupération des utilisateurs de type Model\User car c'est le repository (ici AbstractRepository) qui fait la 
     // correspondance (mapping) entre la base de données et le "Model" objet.
-    $users = $this->userRepository->findAll();
 
-    $html = '<ul>';
+    $html = '<form method="post" action="/users">';
+    $html .= '    <div>';
+    $html .= '        <label for="login">Login :</label>';
+    $html .= '        <input type="text" id="login" name="login" required>';
+    $html .= '    </div>';
+    $html .= '    <div>';
+    $html .= '        <label for="password">Password :</label>';
+    $html .= '        <input type="password" id="password" name="password" required>';
+    $html .= '    </div>';
+    $html .= '    <div>';
+    $html .= '        <label for="email">Email :</label>';
+    $html .= '        <input type="email" id="email" name="email" required>';
+    $html .= '    </div>';
+    $html .= '    <div style="margin-top: 10px;">';
+    $html .= '        <button type="submit">Create</button>';
+    $html .= '    </div>';
+    $html .= '</form>';
+
+    $html .= '<ul>';
+
+    $users = $this->userRepository->findAll();
 
     // Parcours des utilisateurs
     foreach ($users as $user) {
@@ -59,7 +78,6 @@ class UserController
     // Hydratation de l'utilisation
     $userEntity->hydrate($data);
 
-    var_dump($userEntity);
 
     // Appel au modèle ou au repository
     $this->userRepository->save($userEntity);
