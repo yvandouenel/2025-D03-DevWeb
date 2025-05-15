@@ -4,6 +4,8 @@ namespace Diginamic\Framework\Controller;
 
 use Diginamic\Framework\Model\User;
 use Diginamic\Framework\Repository\UserRepository;
+use Diginamic\Framework\Views\UserView;
+use Diginamic\Framework\Views\View;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Psr7\Response;
@@ -20,34 +22,19 @@ class UserController
   public function findAll(ServerRequestInterface $request): ResponseInterface
   {
 
-
+    $title = "Administration des utilisateurs";
     // Récupération des utilisateurs de type Model\User car c'est le repository (ici AbstractRepository) qui fait la 
     // correspondance (mapping) entre la base de données et le "Model" objet.
-
-
-
-    $html = '<ul>';
-
     $users = $this->userRepository->findAll();
-
-    // Parcours des utilisateurs
-    foreach ($users as $user) {
-      $html .= "<li>$user->login</li>";
-      $html .= "<li>$user->password</li>";
-      $html .= "<li>$user->email</li>";
-      $html .= "<li>$user->createdAt</li>";
-    }
-
-    $html .= '</ul>';
-
-
+    $html = "<h1>$title</h1>";
+    $html .= UserView::displayAllUsers($users);
 
     // Utilisation des méthodes de UserRepository()
 
     return new Response(
       200,
       ['Content-Type' => 'text/html'],
-      '<h1>Utilisateurs </h1>' . $html
+      View::baseTemplate($title, $html)
     );
   }
   public function displayAddForm(ServerRequestInterface $request): ResponseInterface
@@ -101,6 +88,34 @@ class UserController
       200,
       ['Content-Type' => 'text/html'],
       '<h1>Utilisateur enregistré </h1>'
+    );
+  }
+  public function delete(ServerRequestInterface $request, array $routeParams = []): ResponseInterface
+  {
+    // Récupération de l'id qui provient de la requête (le paramètre de la route)
+    $id = $routeParams["id"];
+    if (isset($id)) {
+      $delete = $this->userRepository->delete($id);
+
+      // Modification de la base de données via le modèle donc via le repository
+      if (!$delete) {
+        return new Response(
+          418,
+          ['Content-Type' => 'text/html'],
+          '<h1>Problème dans la suppression de l\'utilisateur </h1>'
+        );
+      }
+
+      return new Response(
+        200,
+        ['Content-Type' => 'text/html'],
+        '<h1>Utilisateur supprimé </h1>'
+      );
+    }
+    return new Response(
+      400,
+      ['Content-Type' => 'text/html'],
+      '<h1>La requête HTTP a été mal formulée </h1>'
     );
   }
   public function edit(ServerRequestInterface $request, array $routeParams = [])

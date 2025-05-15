@@ -140,7 +140,7 @@ return [
     ]
   ],
   [
-    'path' => '/users/{id}',
+    'path' => '/users/update/{id}',
     'controller' => UserController::class,
     'controllerMethod' => 'displayFormEdit',
     'httpMethod' => 'GET',
@@ -152,6 +152,14 @@ return [
     'controller' => UserController::class,
     'controllerMethod' => 'edit',
     'httpMethod' => 'POST',
+    'params' => ['id' => '\d+'],
+    'middlewares' => []
+  ],
+  [
+    'path' => '/users/delete/{id}',
+    'controller' => UserController::class,
+    'controllerMethod' => 'delete',
+    'httpMethod' => 'GET',
     'params' => ['id' => '\d+'],
     'middlewares' => []
   ],

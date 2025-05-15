@@ -79,13 +79,14 @@ class Router
   public function dispatch(ServerRequestInterface $request): array
   {
     error_log("Dans dispatch");
-    $path = $request->getUri()->getPath();
+    $rawPath = $request->getUri()->getPath();
+    $path = $rawPath === '/' ? '/' : rtrim($rawPath, '/');
     $httpMethod = $request->getMethod();
 
     error_log("Dans dispatch - Path: " . $path . ", Method: " . $httpMethod);
 
     foreach ($this->routes as $route) {
-      error_log("Vérification route: " . $route->getPath() . " [" . $route->getHttpMethod() . "]");
+      error_log("Vérification route : " . $route->getPath() . " [" . $route->getHttpMethod() . "]");
 
       // Vérifie si la route correspond au chemin et à la méthode HTTP
       if ($route->matches($path) && ($httpMethod == $route->getHttpMethod())) {
