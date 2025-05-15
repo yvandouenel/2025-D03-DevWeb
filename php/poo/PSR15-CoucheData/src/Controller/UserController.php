@@ -26,7 +26,8 @@ class UserController
     // Récupération des utilisateurs de type Model\User car c'est le repository (ici AbstractRepository) qui fait la 
     // correspondance (mapping) entre la base de données et le "Model" objet.
     $users = $this->userRepository->findAll();
-    $html = "<h1>$title</h1>";
+
+    $html = View::header();
     $html .= UserView::displayAllUsers($users);
 
     // Utilisation des méthodes de UserRepository()

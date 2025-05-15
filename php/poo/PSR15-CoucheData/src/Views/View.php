@@ -29,4 +29,28 @@ class View
     HTML;
     return $html;
   }
+  public static function header(array $links): string
+  {
+    // Générer le menu à partir d'un tableau qui contient les intitulés des liens, le chemin et active
+    $lis = "";
+    foreach ($links as $link) {
+
+      $lis .= "<li><a href=\"$link->path\" class=\"$link->active\">$link->title</a></li>";
+    }
+
+
+    // Syntaxe Herédoc
+    $html = <<<HTML
+      <header>
+        <nav>
+          <ul>
+            <li><a href="/" class="">Accueil</a></li>
+            <li><a href="/users">Administration</a></li>
+            
+          </ul>
+        </nav>
+      </header>
+    HTML;
+    return $html;
+  }
 }
