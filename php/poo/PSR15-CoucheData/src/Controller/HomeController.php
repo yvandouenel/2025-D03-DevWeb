@@ -24,6 +24,7 @@ class HomeController
       ]
     ];
     $html = View::header($links);
+    $html .= "<h1>Page d'accueil</h1>";
     return new Response(
       200,
       ['Content-Type' => 'text/html'],
