@@ -41,6 +41,7 @@ class UserRepository extends AbstractRepository
     return null;
   }
 
+
   /**
    * Sauvegarder un utilisateur (création ou mise à jour)
    */
