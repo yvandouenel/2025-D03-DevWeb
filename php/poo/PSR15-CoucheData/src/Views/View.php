@@ -40,7 +40,7 @@ class View
 
     // Syntaxe Herédoc
     $html = <<<HTML
-      <header>
+      <header class="mt-2 mb-4">
         <nav>
           <ul class="nav nav-tabs" >
           $lis

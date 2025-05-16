@@ -9,6 +9,7 @@ class UserView
     // Syntaxe Herédoc
     $html = <<<HTML
       <h2 class="mb-4">Liste des utilisateurs</h2>
+      <h3><a class="btn btn-success my-3" href="/users/add">Ajouter un utilisateur</a></h3>
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     HTML;
 
@@ -41,9 +42,44 @@ class UserView
     return $html;
   }
 
+  public static function displayFormAdd()
+  {
+    $html = <<<HTML
+    <form method="post" action="/users/add" class="container py-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="mb-4">Nouvel utilisateur</h3>
+                
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="login" name="login" required>
+                    <label for="login">Login</label>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <label for="password">Password</label>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <label for="email">Email</label>
+                </div>
+                
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-success">Créer un utilisateur</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    HTML;
+
+    return $html;
+  }
+
   public static function htmlUpdateForm($user)
   {
     $html = <<<HTML
+   
       <form method="post" action="/users/update/{$user->id}" class="container py-4">
           <div class="row mb-3">
               <div class="col-md-6">
