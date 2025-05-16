@@ -2,35 +2,32 @@
 
 namespace Diginamic\Framework\Controller;
 
+use Diginamic\Framework\Views\LoginView;
+use Diginamic\Framework\Views\View;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Psr7\Response;
 
-class LoginController
+class LoginController extends Controller
 {
+  public function __construct(array $routes = [])
+  {
+    $this->routes = $routes;
+  }
   public function index(ServerRequestInterface $request): ResponseInterface
   {
+    $title = "Formulaire d'identification";
+    $links = $this->routesToLinks('/login');
+
+    $html = View::header($links);
     // Création du contenu HTML pour une meilleure lisibilité
-    $html = "<h1>Formulaire d'identification</h1>";
-    $html .= '<form method="post" action="/login-post">';
-    $html .= '    <div>';
-    $html .= '        <label for="login">Votre login :</label>';
-    $html .= '        <input type="text" id="login" name="login" required>';
-    $html .= '    </div>';
-    $html .= '    <div>';
-    $html .= '        <label for="password">Votre mot de passe :</label>';
-    $html .= '        <input type="password" id="password" name="password" required>';
-    $html .= '    </div>';
-    $html .= '    <div style="margin-top: 10px;">';
-    $html .= '        <button type="submit">Envoyer</button>';
-    $html .= '    </div>';
-    $html .= '</form>';
+    $html .= LoginView::displayLoginForm($title);
 
     // Création et renvoi de la réponse
     return new Response(
       200,
       ['Content-Type' => 'text/html; charset=utf-8'],
-      $html
+      View::baseTemplate($title, $html)
     );
   }
   public function submitLogin(ServerRequestInterface $request): ResponseInterface
@@ -54,11 +51,11 @@ class LoginController
     $html .= '    votre login : ' . $login;
     $html .= '</p>';
 
-    // Création et renvoi de la réponse
+    // Si tout s'est bien passé, on redirige
     return new Response(
-      200,
-      ['Content-Type' => 'text/html; charset=utf-8'],
-      $html
+      302,
+      ['Location' => '/users'],
+      ''
     );
   }
 }
