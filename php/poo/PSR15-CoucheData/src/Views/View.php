@@ -42,7 +42,7 @@ class View
     $html = <<<HTML
       <header>
         <nav>
-          <ul>
+          <ul class="nav nav-tabs" >
           $lis
           </ul>
         </nav>

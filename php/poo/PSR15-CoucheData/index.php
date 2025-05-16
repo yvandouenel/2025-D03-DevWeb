@@ -76,7 +76,7 @@ try {
   }
 
   // Définition du contrôleur comme fonction finale
-  $controller = new $route['controller']();
+  $controller = new $route['controller']($routes);
   $method = $route['controllerMethod'];
 
   $middlewareHandler->setController(function ($request) use ($controller, $method, $route) {

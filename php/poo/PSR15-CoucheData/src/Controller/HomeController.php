@@ -9,20 +9,18 @@ use GuzzleHttp\Psr7\Response;
 
 class HomeController
 {
+  private array $routes;
+  // Il faut créer un constructeur qui va récupérer les routes (dans les paramètres)
+  // On stocke les routes dans un attribut $routes
+  // on crée une méthode qui permet de créer le tableau links à partir de $routes
+
+  public function __construct(array $routes = [])
+  {
+    $this->routes = $routes;
+  }
   public function index(ServerRequestInterface $request): ResponseInterface
   {
-    $links = [
-      [
-        'title' => 'Accueil',
-        'path' => '/',
-        'active' => 'active'
-      ],
-      [
-        'title' => 'Utilisateurs',
-        'path' => '/users',
-        'active' => ''
-      ]
-    ];
+    $links = $this->routesToLinks('/');
     $html = View::header($links);
     $html .= "<h1>Page d'accueil</h1>";
     return new Response(
@@ -30,5 +28,19 @@ class HomeController
       ['Content-Type' => 'text/html'],
       View::baseTemplate("Accueil", $html)
     );
+  }
+  private function routesToLinks($activePath)
+  {
+    $links = [];
+    foreach ($this->routes as $route) {
+      if ($route["titleMenu"]) {
+        $links[] = [
+          "title" => $route["titleMenu"],
+          "path" => $route['path'],
+          "active" => ($route['path'] == $activePath) ? " active" : "",
+        ];
+      }
+    }
+    return $links;
   }
 }
