@@ -13,6 +13,7 @@ class AuthMiddleware implements MiddlewareInterface
    * @var array Routes qui nécessitent une authentification
    */
   private array $protectedRoutes;
+  public static array $globaProtectedRoutes = [];
 
   /**
    * @param array $protectedRoutes Liste des routes protégées (ex: ['/admin', '/profile'])
@@ -20,6 +21,7 @@ class AuthMiddleware implements MiddlewareInterface
   public function __construct(array $protectedRoutes = [])
   {
     $this->protectedRoutes = $protectedRoutes;
+    self::$globaProtectedRoutes = array_merge(self::$globaProtectedRoutes, $protectedRoutes);
   }
 
   /**
@@ -68,6 +70,7 @@ class AuthMiddleware implements MiddlewareInterface
 
     // Si l'utilisateur est déjà authentifié via la session
     if (isset($_SESSION['user_authenticated']) && $_SESSION['user_authenticated'] === true) {
+      error_log("USER authenticated with session");
       return true;
     }
 
