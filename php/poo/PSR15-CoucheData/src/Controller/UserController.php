@@ -144,11 +144,11 @@ class UserController extends Controller
           '<h1>Problème dans la mise à jour </h1>'
         );
       }
-
+      // Quand tout se passe bien (utilisateur mis à jour), je veux faire une redirection vers /users
       return new Response(
-        200,
-        ['Content-Type' => 'text/html'],
-        '<h1>Utilisateur mis à jour </h1>'
+        302,
+        ['Location' => '/users'],
+        ''
       );
     }
     return new Response(
@@ -165,8 +165,18 @@ class UserController extends Controller
     // Récupération de l'id qui provient de la requête (le paramètre de la route)
     $id = $routeParams["id"];
     if (isset($id)) {
+      $title = "Ajout d'un utilisateur";
+      // Récupération des utilisateurs de type Model\User car c'est le repository (ici AbstractRepository) qui fait la 
+
+
+      $links = $this->routesToLinks('/users');
+
+      $html = View::header($links);
+
       // Récupération des données de l'utilisateur à modifier en passant par le repository
       $user = $this->userRepository->findById($id);
+
+      $html .= UserView::htmlUpdateForm($user);
 
       // Si je n'ai pas d'utilisateur, je renvoie une erreur 404
       if (!$user) {
@@ -180,7 +190,7 @@ class UserController extends Controller
       return new Response(
         200,
         ['Content-Type' => 'text/html'],
-        '<h1>Formulaire de modification : </h1>' . $this->htmlUpdateForm($user)
+        View::baseTemplate($title, $html)
       );
     }
     return new Response(
@@ -191,28 +201,5 @@ class UserController extends Controller
 
 
     // Affiche les données du modèle dans un formulaire
-  }
-
-  private function htmlUpdateForm($user)
-  {
-    $html = '<form method="post" action="/users/update/' . $user->id . '">';
-    $html .= '    <div>';
-    $html .= '        <label for="login">Login :</label>';
-    $html .= '        <input type="text" id="login" value="' . $user->login . '" name="login" required>';
-    $html .= '    </div>';
-    $html .= '    <div>';
-    $html .= '        <label for="password">Password :</label>';
-    $html .= '        <input type="password" id="password" value="' . $user->password . '" name="password" required>';
-    $html .= '    </div>';
-    $html .= '    <div>';
-    $html .= '        <label for="email">Email :</label>';
-    $html .= '        <input type="email" id="email" value="' . $user->email . '" name="email" required>';
-    $html .= '    </div>';
-    $html .= '    <div style="margin-top: 10px;">';
-    $html .= '        <button type="submit">Modifier</button>';
-    $html .= '    </div>';
-    $html .= '</form>';
-
-    return $html;
   }
 }
