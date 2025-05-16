@@ -31,11 +31,10 @@ class View
   }
   public static function header(array $links): string
   {
-    // Générer le menu à partir d'un tableau qui contient les intitulés des liens, le chemin et active
+    // Générer le menu à partir d'un tableau qui contient les titres des liens, le chemin et active
     $lis = "";
     foreach ($links as $link) {
-
-      $lis .= "<li><a href=\"$link->path\" class=\"$link->active\">$link->title</a></li>";
+      $lis .= "<li class=\"nav-item\"><a href=\"{$link['path']}\" class=\"nav-link{$link['active']}\">{$link['title']}</a></li>";
     }
 
 
@@ -44,9 +43,7 @@ class View
       <header>
         <nav>
           <ul>
-            <li><a href="/" class="">Accueil</a></li>
-            <li><a href="/users">Administration</a></li>
-            
+          $lis
           </ul>
         </nav>
       </header>

@@ -11,11 +11,23 @@ class HomeController
 {
   public function index(ServerRequestInterface $request): ResponseInterface
   {
-    $html = View::baseTemplate();
+    $links = [
+      [
+        'title' => 'Accueil',
+        'path' => '/',
+        'active' => 'active'
+      ],
+      [
+        'title' => 'Utilisateurs',
+        'path' => '/users',
+        'active' => ''
+      ]
+    ];
+    $html = View::header($links);
     return new Response(
       200,
       ['Content-Type' => 'text/html'],
-      $html
+      View::baseTemplate("Accueil", $html)
     );
   }
 }

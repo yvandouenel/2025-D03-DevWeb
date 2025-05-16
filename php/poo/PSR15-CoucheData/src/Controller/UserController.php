@@ -27,7 +27,20 @@ class UserController
     // correspondance (mapping) entre la base de données et le "Model" objet.
     $users = $this->userRepository->findAll();
 
-    $html = View::header();
+    $links = [
+      [
+        'title' => 'Accueil',
+        'path' => '/',
+        'active' => ''
+      ],
+      [
+        'title' => 'Utilisateurs',
+        'path' => '/users',
+        'active' => 'active'
+      ]
+    ];
+
+    $html = View::header($links);
     $html .= UserView::displayAllUsers($users);
 
     // Utilisation des méthodes de UserRepository()

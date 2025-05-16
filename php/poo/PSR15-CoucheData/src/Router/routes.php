@@ -26,6 +26,7 @@ return [
     'controllerMethod' => 'index',
     'httpMethod' => 'GET',
     'params' => [],
+    'titleMenu' => 'Accueil',
     'middlewares' => [
       // Vous pouvez ajouter des middlewares spécifiques à cette route
       // new LoggingMiddleware(),
@@ -37,6 +38,7 @@ return [
     'controllerMethod' => 'index',
     'httpMethod' => 'GET',
     'params' => [],
+    'titleMenu' => '',
     'middlewares' => []
   ],
   [
@@ -45,6 +47,7 @@ return [
     'controllerMethod' => 'index',
     'httpMethod' => 'GET',
     'params' => [],
+    'titleMenu' => 'Administration',
     'middlewares' => [
       // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
     ]
@@ -57,6 +60,7 @@ return [
     'params' => [
       'id' => '\d+' // Le paramètre id doit être un nombre
     ],
+    'titleMenu' => '',
     'middlewares' => []
   ],
   [
@@ -65,6 +69,7 @@ return [
     'controllerMethod' => 'index',
     'httpMethod' => 'GET',
     'params' => [],
+    'titleMenu' => '',
     'middlewares' => [
       // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
     ]
@@ -75,6 +80,7 @@ return [
     'controllerMethod' => 'submitContact',
     'httpMethod' => 'POST',
     'params' => [],
+    'titleMenu' => '',
     'middlewares' => [
       // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
     ]
@@ -85,6 +91,7 @@ return [
     'controllerMethod' => 'contactSuccess',
     'httpMethod' => 'GET',
     'params' => [],
+    'titleMenu' => '',
     'middlewares' => [
       // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
     ]
@@ -95,6 +102,7 @@ return [
     'controllerMethod' => 'index',
     'httpMethod' => 'GET',
     'params' => [],
+    'titleMenu' => 'Identification',
     'middlewares' => [
       // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
     ]
@@ -105,6 +113,7 @@ return [
     'controllerMethod' => 'submitLogin',
     'httpMethod' => 'POST',
     'params' => [],
+    'titleMenu' => '',
     'middlewares' => [
       // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
     ]
@@ -115,6 +124,7 @@ return [
     'controllerMethod' => 'findAll',
     'httpMethod' => 'GET',
     'params' => [],
+    'titleMenu' => 'Gestion des utilisateurs',
     'middlewares' => [
       // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
     ]
@@ -125,6 +135,7 @@ return [
     'controllerMethod' => 'displayAddForm',
     'httpMethod' => 'GET',
     'params' => [],
+    'titleMenu' => '',
     'middlewares' => [
       new AuthMiddleware(['/users/add'])
     ]
@@ -135,6 +146,7 @@ return [
     'controllerMethod' => 'add',
     'httpMethod' => 'POST',
     'params' => [],
+    'titleMenu' => '',
     'middlewares' => [
       new AuthMiddleware(['/users/add'])
     ]
@@ -145,6 +157,7 @@ return [
     'controllerMethod' => 'displayFormEdit',
     'httpMethod' => 'GET',
     'params' => ['id' => '\d+'],
+    'titleMenu' => '',
     'middlewares' => []
   ],
   [
@@ -153,6 +166,7 @@ return [
     'controllerMethod' => 'edit',
     'httpMethod' => 'POST',
     'params' => ['id' => '\d+'],
+    'titleMenu' => '',
     'middlewares' => []
   ],
   [
@@ -161,6 +175,7 @@ return [
     'controllerMethod' => 'delete',
     'httpMethod' => 'GET',
     'params' => ['id' => '\d+'],
+    'titleMenu' => '',
     'middlewares' => []
   ],
 
