@@ -7,9 +7,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Psr7\Response;
 
-class HomeController
+class HomeController extends Controller
 {
-  private array $routes;
   // Il faut créer un constructeur qui va récupérer les routes (dans les paramètres)
   // On stocke les routes dans un attribut $routes
   // on crée une méthode qui permet de créer le tableau links à partir de $routes
@@ -28,19 +27,5 @@ class HomeController
       ['Content-Type' => 'text/html'],
       View::baseTemplate("Accueil", $html)
     );
-  }
-  private function routesToLinks($activePath)
-  {
-    $links = [];
-    foreach ($this->routes as $route) {
-      if ($route["titleMenu"]) {
-        $links[] = [
-          "title" => $route["titleMenu"],
-          "path" => $route['path'],
-          "active" => ($route['path'] == $activePath) ? " active" : "",
-        ];
-      }
-    }
-    return $links;
   }
 }

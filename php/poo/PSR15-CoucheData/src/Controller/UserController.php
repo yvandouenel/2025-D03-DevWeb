@@ -10,14 +10,15 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Psr7\Response;
 
-class UserController
+class UserController extends Controller
 {
-  // Attribut 
+  // Attributs
   private $userRepository;
 
-  public function __construct()
+  public function __construct(array $routes = [])
   {
     $this->userRepository = new UserRepository();
+    $this->routes = $routes;
   }
   public function findAll(ServerRequestInterface $request): ResponseInterface
   {
@@ -27,18 +28,7 @@ class UserController
     // correspondance (mapping) entre la base de données et le "Model" objet.
     $users = $this->userRepository->findAll();
 
-    $links = [
-      [
-        'title' => 'Accueil',
-        'path' => '/',
-        'active' => ''
-      ],
-      [
-        'title' => 'Utilisateurs',
-        'path' => '/users',
-        'active' => 'active'
-      ]
-    ];
+    $links = $this->routesToLinks('/users');
 
     $html = View::header($links);
     $html .= UserView::displayAllUsers($users);
@@ -51,6 +41,7 @@ class UserController
       View::baseTemplate($title, $html)
     );
   }
+
   public function displayAddForm(ServerRequestInterface $request): ResponseInterface
   {
     $html = '<form method="post" action="/users/add">';
