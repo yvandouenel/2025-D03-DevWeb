@@ -44,28 +44,17 @@ class UserController extends Controller
 
   public function displayAddForm(ServerRequestInterface $request): ResponseInterface
   {
-    $html = '<form method="post" action="/users/add">';
-    $html .= '    <div>';
-    $html .= '        <label for="login">Login :</label>';
-    $html .= '        <input type="text" id="login" name="login" required>';
-    $html .= '    </div>';
-    $html .= '    <div>';
-    $html .= '        <label for="password">Password :</label>';
-    $html .= '        <input type="password" id="password" name="password" required>';
-    $html .= '    </div>';
-    $html .= '    <div>';
-    $html .= '        <label for="email">Email :</label>';
-    $html .= '        <input type="email" id="email" name="email" required>';
-    $html .= '    </div>';
-    $html .= '    <div style="margin-top: 10px;">';
-    $html .= '        <button type="submit">Create</button>';
-    $html .= '    </div>';
-    $html .= '</form>';
+    $links = $this->routesToLinks('/users');
+
+    $html = View::header($links);
+    $html .= UserView::displayFormAdd();
+
+
 
     return new Response(
       200,
       ['Content-Type' => 'text/html'],
-      '<h1>Ajout d\'un utilisateur </h1>' . $html
+      View::baseTemplate("Ajout d'un utilisateur", $html)
     );
   }
 
@@ -73,7 +62,6 @@ class UserController extends Controller
   {
     // Récupération des données du formulaire dans le cadre du PSR-7 qui utilise les objets request et response
     $data = $request->getParsedBody();
-    var_dump($data);
 
     // Création de l'entité User
     $userEntity = new User();
@@ -87,12 +75,11 @@ class UserController extends Controller
 
 
 
-    // Utilisation des méthodes de UserRepository()
-
+    // Si tout s'est bien passé, on redirige
     return new Response(
-      200,
-      ['Content-Type' => 'text/html'],
-      '<h1>Utilisateur enregistré </h1>'
+      302,
+      ['Location' => '/users'],
+      ''
     );
   }
   public function delete(ServerRequestInterface $request, array $routeParams = []): ResponseInterface
@@ -110,11 +97,12 @@ class UserController extends Controller
           '<h1>Problème dans la suppression de l\'utilisateur </h1>'
         );
       }
-
+      // Quand la suppression a bien eu lieu, on redirige
+      // Quand tout se passe bien (utilisateur mis à jour), je veux faire une redirection vers /users
       return new Response(
-        200,
-        ['Content-Type' => 'text/html'],
-        '<h1>Utilisateur supprimé </h1>'
+        302,
+        ['Location' => '/users'],
+        ''
       );
     }
     return new Response(
