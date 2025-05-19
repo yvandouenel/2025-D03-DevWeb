@@ -15,6 +15,7 @@ use GuzzleHttp\Psr7\Response;
 // Démarrer la session si vous utilisez les sessions pour l'authentification
 session_start();
 
+
 // Chemins relatifs à la racine du projet
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/src/templates');
 $twig = new \Twig\Environment($loader, [

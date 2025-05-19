@@ -3,7 +3,6 @@
 namespace Diginamic\Framework\Controller;
 
 use Diginamic\Framework\Services\NavigationService;
-use Diginamic\Framework\Views\View;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Psr7\Response;
@@ -22,7 +21,7 @@ class HomeController extends Controller
   }
   public function index(ServerRequestInterface $request): ResponseInterface
   {
-    $links = $this->navService->routesToLinks('/');
+
     $html = $this->twig->render('home/index.twig', [
       'title' => "Bienvenue sur notre site web",
       'links' => $this->navService->routesToLinks('/'),

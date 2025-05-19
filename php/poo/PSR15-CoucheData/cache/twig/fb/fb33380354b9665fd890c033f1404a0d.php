@@ -54,29 +54,25 @@ class __TwigTemplate_678fb945108248a7cb6b632f3a7839cf extends Template
 \t</head>
 \t<body>
 \t\t<header class=\"mt-2 mb-4 container\">
-\t\t\t";
-        // line 12
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\DebugExtension::dump($this->env, $context, ...[($context["links"] ?? null)]), "html", null, true);
-        yield "
 \t\t\t<nav>
 \t\t\t\t<ul class=\"nav nav-tabs\">
 \t\t\t\t\t";
-        // line 15
+        // line 14
         $context['_parent'] = $context;
         $context['_seq'] = CoreExtension::ensureTraversable(($context["links"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["link"]) {
-            // line 16
+            // line 15
             yield "
 \t\t\t\t\t\t<li class=\"nav-item\">
 \t\t\t\t\t\t\t<a href=\"";
-            // line 18
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["link"], "path", [], "any", false, false, false, 18), "html", null, true);
+            // line 17
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["link"], "path", [], "any", false, false, false, 17), "html", null, true);
             yield "\" class=\"nav-link ";
-            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["link"], "active", [], "any", false, false, false, 18)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["link"], "active", [], "any", false, false, false, 17)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
                 yield " active";
             }
             yield "\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["link"], "title", [], "any", false, false, false, 18), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["link"], "title", [], "any", false, false, false, 17), "html", null, true);
             yield "</a>
 \t\t\t\t\t\t</li>
 \t\t\t\t\t";
@@ -84,21 +80,21 @@ class __TwigTemplate_678fb945108248a7cb6b632f3a7839cf extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['link'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 21
+        // line 20
         yield "\t\t\t\t</ul>
 \t\t\t</nav>
 \t\t</body>
 \t</body>
 </html></header><div class=\"container\"> ";
-        // line 25
+        // line 24
         yield from $this->unwrap()->yieldBlock('content', $context, $blocks);
-        // line 26
+        // line 25
         yield "</div></body></html></body></html>
 ";
         yield from [];
     }
 
-    // line 25
+    // line 24
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -129,7 +125,7 @@ class __TwigTemplate_678fb945108248a7cb6b632f3a7839cf extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  102 => 25,  96 => 26,  94 => 25,  88 => 21,  73 => 18,  69 => 16,  65 => 15,  59 => 12,  50 => 6,  43 => 1,);
+        return array (  98 => 24,  92 => 25,  90 => 24,  84 => 20,  69 => 17,  65 => 15,  61 => 14,  50 => 6,  43 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -145,7 +141,6 @@ class __TwigTemplate_678fb945108248a7cb6b632f3a7839cf extends Template
 \t</head>
 \t<body>
 \t\t<header class=\"mt-2 mb-4 container\">
-\t\t\t{{ dump(links) }}
 \t\t\t<nav>
 \t\t\t\t<ul class=\"nav nav-tabs\">
 \t\t\t\t\t{% for link in links %}

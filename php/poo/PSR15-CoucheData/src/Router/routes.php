@@ -1,9 +1,6 @@
 <?php
 
 use Diginamic\Framework\Controller\HomeController;
-use Diginamic\Framework\Controller\FirstController;
-use Diginamic\Framework\Controller\AdminController;
-use Diginamic\Framework\Controller\ContactController;
 use Diginamic\Framework\Controller\LoginController;
 use Diginamic\Framework\Controller\UserController;
 use Diginamic\Framework\Middleware\AuthMiddleware;
@@ -32,70 +29,7 @@ return [
       // new LoggingMiddleware(),
     ]
   ],
-  [
-    'path' => '/first',
-    'controller' => FirstController::class,
-    'controllerMethod' => 'index',
-    'httpMethod' => 'GET',
-    'params' => [],
-    'titleMenu' => '',
-    'middlewares' => []
-  ],
-  [
-    'path' => '/admin',
-    'controller' => AdminController::class, // À changer avec votre contrôleur d'admin
-    'controllerMethod' => 'index',
-    'httpMethod' => 'GET',
-    'params' => [],
-    'titleMenu' => 'Administration',
-    'middlewares' => [
-      new AuthMiddleware(['/admin'])
-    ]
-  ],
-  [
-    'path' => '/profile/{id}',
-    'controller' => HomeController::class, // À changer avec votre contrôleur de profil
-    'controllerMethod' => 'showProfile',
-    'httpMethod' => 'GET',
-    'params' => [
-      'id' => '\d+' // Le paramètre id doit être un nombre
-    ],
-    'titleMenu' => '',
-    'middlewares' => []
-  ],
-  [
-    'path' => '/contact',
-    'controller' => ContactController::class,
-    'controllerMethod' => 'index',
-    'httpMethod' => 'GET',
-    'params' => [],
-    'titleMenu' => '',
-    'middlewares' => [
-      // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
-    ]
-  ],
-  [
-    'path' => '/contact-post',
-    'controller' => ContactController::class,
-    'controllerMethod' => 'submitContact',
-    'httpMethod' => 'POST',
-    'params' => [],
-    'titleMenu' => '',
-    'middlewares' => [
-      // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
-    ]
-  ],
-  [
-    'path' => '/contact-success',
-    'controller' => ContactController::class,
-    'controllerMethod' => 'contactSuccess',
-    'httpMethod' => 'GET',
-    'params' => [],
-    'titleMenu' => '',
-    'middlewares' => [
-      // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
-    ]
-  ],
+
   [
     'path' => '/login',
     'controller' => LoginController::class,

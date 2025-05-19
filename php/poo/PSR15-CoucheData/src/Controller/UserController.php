@@ -5,21 +5,21 @@ namespace Diginamic\Framework\Controller;
 use Diginamic\Framework\Model\User;
 use Diginamic\Framework\Repository\UserRepository;
 use Diginamic\Framework\Services\NavigationService;
-use Diginamic\Framework\Views\UserView;
-use Diginamic\Framework\Views\View;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Psr7\Response;
+use Twig\Environment;
 
 class UserController extends Controller
 {
   // Attributs
   private $userRepository;
 
-  public function __construct(NavigationService $navService)
+  public function __construct(NavigationService $navService, Environment $twig)
   {
     $this->userRepository = new UserRepository();
     $this->navService = $navService;
+    $this->twig = $twig;
   }
   public function findAll(ServerRequestInterface $request): ResponseInterface
   {
@@ -29,33 +29,35 @@ class UserController extends Controller
     // correspondance (mapping) entre la base de données et le "Model" objet.
     $users = $this->userRepository->findAll();
 
-    $links = $this->navService->routesToLinks('/users');
-
-    $html = View::header($links);
-    $html .= UserView::displayAllUsers($users);
-
-    // Utilisation des méthodes de UserRepository()
+    $html = $this->twig->render('users/index.twig', [
+      'title' => $title,
+      'links' => $this->navService->routesToLinks('/users'),
+      'users' => $users
+    ]);
 
     return new Response(
       200,
       ['Content-Type' => 'text/html'],
-      View::baseTemplate($title, $html)
+      $html
     );
   }
 
   public function displayAddForm(ServerRequestInterface $request): ResponseInterface
   {
-    $links = $this->routesToLinks('/users');
 
-    $html = View::header($links);
-    $html .= UserView::displayFormAdd();
+    $title =  "Ajout d'un utilisateur";
+    $html = $this->twig->render('users/addForm.twig', [
+      'title' => $title,
+      'links' => $this->navService->routesToLinks('/'),
+
+    ]);
 
 
 
     return new Response(
       200,
       ['Content-Type' => 'text/html'],
-      View::baseTemplate("Ajout d'un utilisateur", $html)
+      $html
     );
   }
 
@@ -153,19 +155,18 @@ class UserController extends Controller
   {
     // Récupération de l'id qui provient de la requête (le paramètre de la route)
     $id = $routeParams["id"];
+
+    $title = "Modification d'un utilisateur";
     if (isset($id)) {
-      $title = "Ajout d'un utilisateur";
-      // Récupération des utilisateurs de type Model\User car c'est le repository (ici AbstractRepository) qui fait la 
-
-
-      $links = $this->routesToLinks('/users');
-
-      $html = View::header($links);
 
       // Récupération des données de l'utilisateur à modifier en passant par le repository
       $user = $this->userRepository->findById($id);
 
-      $html .= UserView::htmlUpdateForm($user);
+      $html = $this->twig->render('users/updateForm.twig', [
+        'title' => $title,
+        'links' => $this->navService->routesToLinks('/users'),
+        'user' => $user
+      ]);
 
       // Si je n'ai pas d'utilisateur, je renvoie une erreur 404
       if (!$user) {
@@ -179,7 +180,7 @@ class UserController extends Controller
       return new Response(
         200,
         ['Content-Type' => 'text/html'],
-        View::baseTemplate($title, $html)
+        $html
       );
     }
     return new Response(
@@ -187,8 +188,5 @@ class UserController extends Controller
       ['Content-Type' => 'text/html'],
       '<h1>La requête HTTP a été mal forumlée </h1>'
     );
-
-
-    // Affiche les données du modèle dans un formulaire
   }
 }

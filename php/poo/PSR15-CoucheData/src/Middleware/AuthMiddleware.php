@@ -86,6 +86,7 @@ class AuthMiddleware implements MiddlewareInterface
 
       if ($user) {
         // Authentification réussie - stocker dans la session
+
         $_SESSION['user_authenticated'] = true;
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_login'] = $user->login;
