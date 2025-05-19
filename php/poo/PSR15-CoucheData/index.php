@@ -8,6 +8,7 @@ use Diginamic\Framework\Exception\RouteNotFoundException;
 use Diginamic\Framework\Middleware\MiddlewareHandler;
 use Diginamic\Framework\Middleware\AuthMiddleware;
 use Diginamic\Framework\Middleware\InputSanitizerMiddleware;
+use Diginamic\Framework\Services\NavigationService;
 use GuzzleHttp\Psr7\ServerRequest;
 use GuzzleHttp\Psr7\Response;
 
@@ -44,6 +45,9 @@ $router->addMiddleware($inputSanitizerMiddleware);
 // Chargement des routes depuis le fichier routes.php
 $routes = require_once __DIR__ . '/src/Router/routes.php';
 
+// Instanciation des services
+$navService = new NavigationService($routes);
+
 // Parcours du tableau de routes et ajout de chaque route au router
 foreach ($routes as $route) {
   $middlewares = $route['middlewares'] ?? [];
@@ -76,7 +80,7 @@ try {
   }
 
   // Définition du contrôleur comme fonction finale
-  $controller = new $route['controller']($routes);
+  $controller = new $route['controller']($navService);
   $method = $route['controllerMethod'];
 
   $middlewareHandler->setController(function ($request) use ($controller, $method, $route) {

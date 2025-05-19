@@ -2,6 +2,7 @@
 
 namespace Diginamic\Framework\Controller;
 
+use Diginamic\Framework\Services\NavigationService;
 use Diginamic\Framework\Views\LoginView;
 use Diginamic\Framework\Views\View;
 use Psr\Http\Message\ServerRequestInterface;
@@ -10,14 +11,14 @@ use GuzzleHttp\Psr7\Response;
 
 class LoginController extends Controller
 {
-  public function __construct(array $routes = [])
+  public function __construct(NavigationService $navService)
   {
-    $this->routes = $routes;
+    $this->navService = $navService;
   }
   public function index(ServerRequestInterface $request): ResponseInterface
   {
     $title = "Formulaire d'identification";
-    $links = $this->routesToLinks('/login');
+    $links = $this->navService->routesToLinks('/login');
 
     $html = View::header($links);
     // Création du contenu HTML pour une meilleure lisibilité

@@ -2,6 +2,7 @@
 
 namespace Diginamic\Framework\Controller;
 
+use Diginamic\Framework\Services\NavigationService;
 use Diginamic\Framework\Views\View;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -13,13 +14,13 @@ class HomeController extends Controller
   // On stocke les routes dans un attribut $routes
   // on crée une méthode qui permet de créer le tableau links à partir de $routes
 
-  public function __construct(array $routes = [])
+  public function __construct(NavigationService $navService)
   {
-    $this->routes = $routes;
+    $this->navService = $navService;
   }
   public function index(ServerRequestInterface $request): ResponseInterface
   {
-    $links = $this->routesToLinks('/');
+    $links = $this->navService->routesToLinks('/');
     $html = View::header($links);
     $html .= "<h1>Page d'accueil</h1>";
     return new Response(

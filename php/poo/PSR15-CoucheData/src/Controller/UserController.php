@@ -4,6 +4,7 @@ namespace Diginamic\Framework\Controller;
 
 use Diginamic\Framework\Model\User;
 use Diginamic\Framework\Repository\UserRepository;
+use Diginamic\Framework\Services\NavigationService;
 use Diginamic\Framework\Views\UserView;
 use Diginamic\Framework\Views\View;
 use Psr\Http\Message\ServerRequestInterface;
@@ -15,10 +16,10 @@ class UserController extends Controller
   // Attributs
   private $userRepository;
 
-  public function __construct(array $routes = [])
+  public function __construct(NavigationService $navService)
   {
     $this->userRepository = new UserRepository();
-    $this->routes = $routes;
+    $this->navService = $navService;
   }
   public function findAll(ServerRequestInterface $request): ResponseInterface
   {
@@ -28,7 +29,7 @@ class UserController extends Controller
     // correspondance (mapping) entre la base de données et le "Model" objet.
     $users = $this->userRepository->findAll();
 
-    $links = $this->routesToLinks('/users');
+    $links = $this->navService->routesToLinks('/users');
 
     $html = View::header($links);
     $html .= UserView::displayAllUsers($users);
