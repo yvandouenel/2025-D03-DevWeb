@@ -1,0 +1,18 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	{# Déclaration de la variable locale i #}
+	{% set i = 12 %}
+
+	<h1>
+		<strong>{{ title }}</strong>
+
+	</h1>
+	<h2>Date du jour
+		{{ date|date('d/m/Y H:i', timezone: "Europe/Paris") }}
+		{{ i }}</h2>
+	{{ include('home/test.twig') }}
+
+	<h4>{{ i }}</h4>
+
+{% endblock %}

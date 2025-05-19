@@ -15,6 +15,14 @@ use GuzzleHttp\Psr7\Response;
 // Démarrer la session si vous utilisez les sessions pour l'authentification
 session_start();
 
+// Chemins relatifs à la racine du projet
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/src/templates');
+$twig = new \Twig\Environment($loader, [
+  'cache' => __DIR__ . '/cache/twig', // Assurez-vous que ce dossier existe et est accessible en écriture
+  'debug' => true // Activez le mode debug pendant le développement
+]);
+$twig->addExtension(new \Twig\Extension\DebugExtension());
+
 // Chargement des variables d'environnement
 $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -79,8 +87,8 @@ try {
     $middlewareHandler->addMiddleware($middleware);
   }
 
-  // Définition du contrôleur comme fonction finale
-  $controller = new $route['controller']($navService);
+  // Définition du contrôleur comme fonction finale avec instanciation du contrôleur en fonction de la route
+  $controller = new $route['controller']($navService, $twig);
   $method = $route['controllerMethod'];
 
   $middlewareHandler->setController(function ($request) use ($controller, $method, $route) {

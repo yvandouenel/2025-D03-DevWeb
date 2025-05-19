@@ -7,6 +7,7 @@ use Diginamic\Framework\Views\View;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Psr7\Response;
+use Twig\Environment;
 
 class HomeController extends Controller
 {
@@ -14,19 +15,25 @@ class HomeController extends Controller
   // On stocke les routes dans un attribut $routes
   // on crée une méthode qui permet de créer le tableau links à partir de $routes
 
-  public function __construct(NavigationService $navService)
+  public function __construct(NavigationService $navService, Environment $twig)
   {
     $this->navService = $navService;
+    $this->twig = $twig;
   }
   public function index(ServerRequestInterface $request): ResponseInterface
   {
     $links = $this->navService->routesToLinks('/');
-    $html = View::header($links);
-    $html .= "<h1>Page d'accueil</h1>";
+    $html = $this->twig->render('home/index.twig', [
+      'title' => "Bienvenue sur notre site web",
+      'links' => $this->navService->routesToLinks('/'),
+      'date' => date(DATE_ATOM, strtotime('now'))
+    ]);
+    /* $html = View::header($links);
+    $html .= "<h1>Page d'accueil</h1>"; */
     return new Response(
       200,
       ['Content-Type' => 'text/html'],
-      View::baseTemplate("Accueil", $html)
+      $html
     );
-  }
+  } //View::baseTemplate("Accueil", $html)
 }
