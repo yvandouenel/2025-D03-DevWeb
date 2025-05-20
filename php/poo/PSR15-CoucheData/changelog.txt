@@ -1,0 +1,7 @@
+version 0.5.0 - 20/05/2025
+----------------------------------------------------------------------------------
+PSR-0 bonnes pratiques de code php
+PSR-4 autoload + namespace (fait avec composer)
+PSR-7 instanciation de request et de response + la gestion des routes
+PSR-15 Middlewares
+MVC finalisés avec Modèle (Repository) Vues (avec ou sans twig) Contrôleurs

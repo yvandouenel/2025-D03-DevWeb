@@ -8,27 +8,29 @@ use Diginamic\Framework\Views\View;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Psr7\Response;
+use Twig\Environment;
 
 class LoginController extends Controller
 {
-  public function __construct(NavigationService $navService)
+  public function __construct(NavigationService $navService, Environment $twig)
   {
     $this->navService = $navService;
+    $this->twig = $twig;
   }
   public function index(ServerRequestInterface $request): ResponseInterface
   {
     $title = "Formulaire d'identification";
-    $links = $this->navService->routesToLinks('/login');
 
-    $html = View::header($links);
-    // Création du contenu HTML pour une meilleure lisibilité
-    $html .= LoginView::displayLoginForm($title);
+    $html = $this->twig->render('login/formLogin.twig', [
+      'title' => $title,
+      'links' => $this->navService->routesToLinks('/login'),
+    ]);
 
     // Création et renvoi de la réponse
     return new Response(
       200,
       ['Content-Type' => 'text/html; charset=utf-8'],
-      View::baseTemplate($title, $html)
+      $html
     );
   }
   public function submitLogin(ServerRequestInterface $request): ResponseInterface
