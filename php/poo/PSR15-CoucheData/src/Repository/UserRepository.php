@@ -32,9 +32,11 @@ class UserRepository extends AbstractRepository
   public function authenticate(string $login, string $password): ?User
   {
     $user = $this->findByLogin($login);
-
-    // En production, utilisez password_verify() pour comparer les mots de passe hachés
-    if ($user && $user->password === $password) {
+    // Utilisation de password_verify() pour comparer les mots de passe hachés
+    if ($user && password_verify(
+      $password,
+      $user->password
+    )) {
       return $user;
     }
 
@@ -74,7 +76,7 @@ class UserRepository extends AbstractRepository
 
       $result = $stmt->execute([
         'login' => $entity->login,
-        'password' => $entity->password,
+        'password' => password_hash($entity->password, PASSWORD_BCRYPT),
         'email' => $entity->email
       ]);
 
