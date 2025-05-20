@@ -17,7 +17,7 @@ session_start();
 
 
 // Chemins relatifs à la racine du projet
-$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/src/templates');
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/src/Views');
 $twig = new \Twig\Environment($loader, [
   'cache' => __DIR__ . '/cache/twig', // Assurez-vous que ce dossier existe et est accessible en écriture
   'debug' => true // Activez le mode debug pendant le développement
