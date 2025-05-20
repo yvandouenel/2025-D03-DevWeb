@@ -9,6 +9,7 @@ use Diginamic\Framework\Middleware\MiddlewareHandler;
 use Diginamic\Framework\Middleware\AuthMiddleware;
 use Diginamic\Framework\Middleware\InputSanitizerMiddleware;
 use Diginamic\Framework\Services\NavigationService;
+use Diginamic\Framework\Services\ServiceLocator;
 use GuzzleHttp\Psr7\ServerRequest;
 use GuzzleHttp\Psr7\Response;
 
@@ -23,6 +24,9 @@ $twig = new \Twig\Environment($loader, [
   'debug' => true // Activez le mode debug pendant le développement
 ]);
 $twig->addExtension(new \Twig\Extension\DebugExtension());
+
+// Assigne la clé "twig" et la valeur $twig à l'attribut static $services
+ServiceLocator::set('twig', $twig);
 
 // Chargement des variables d'environnement
 $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
@@ -54,8 +58,11 @@ $router->addMiddleware($inputSanitizerMiddleware);
 // Chargement des routes depuis le fichier routes.php
 $routes = require_once __DIR__ . '/src/Router/routes.php';
 
-// Instanciation des services
+// Instanciation du service NavigationService
 $navService = new NavigationService($routes);
+
+// Ajout du service à l'attribut static services de ServiceLocator
+ServiceLocator::set('navService', $navService);
 
 // Parcours du tableau de routes et ajout de chaque route au router
 foreach ($routes as $route) {
