@@ -13,7 +13,7 @@ use Diginamic\Framework\Services\ServiceLocator;
 use GuzzleHttp\Psr7\ServerRequest;
 use GuzzleHttp\Psr7\Response;
 
-// Démarrer la session si vous utilisez les sessions pour l'authentification
+// Démarrer la session dans laquelle on peut stocker des infos concernant un même client (navigateur)
 session_start();
 
 

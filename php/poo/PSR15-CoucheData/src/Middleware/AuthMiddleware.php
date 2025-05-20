@@ -4,6 +4,7 @@ namespace Diginamic\Framework\Middleware;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Diginamic\Framework\Repository\UserRepository;
+use Diginamic\Framework\Services\ServiceLocator;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Psr7\Response;
 
@@ -40,8 +41,33 @@ class AuthMiddleware implements MiddlewareInterface
       if (strpos($path, $protectedRoute) === 0) {
         // Ici, mettre la logique d'authentification
         // Par exemple, vérifier si l'utilisateur est connecté via une session
+        if (isset($_SESSION['failed_login_attempt']) && $_SESSION['failed_login_attempt'] > 3) {
+          // Récupération de l'instance de NavigationService
+          $navService = ServiceLocator::get("navService");
+
+          // Récupération de l'instance de twig
+          $twig = ServiceLocator::get("twig");
+
+          $html = $twig->render('error/index.twig', [
+            'title' => "Tu es blacklisté mon vieux",
+            'links' => $navService->routesToLinks('/users'),
+          ]);
+          return new Response(
+            400,
+            ['Content-Type' => 'text/html'],
+            $html
+          );
+        }
+
 
         if (!$this->isAuthenticated($request)) {
+          if (!isset($_SESSION['failed_login_attempt'])) {
+            $_SESSION['failed_login_attempt'] = 1;
+          } else {
+            $_SESSION['failed_login_attempt'] = $_SESSION['failed_login_attempt'] + 1;
+            //Si c'est supérieur à 3, alors je lui renvoie immédiatement une réponse pour lui dire qu'il est out pour un moment
+
+          }
           // Redirection vers la page de connexion ou message d'erreur
           return new Response(
             401,
