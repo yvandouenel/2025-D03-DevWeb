@@ -4,6 +4,7 @@ use Diginamic\Framework\Controller\HomeController;
 use Diginamic\Framework\Controller\LoginController;
 use Diginamic\Framework\Controller\UserController;
 use Diginamic\Framework\Middleware\AuthMiddleware;
+use Diginamic\Framework\Middleware\InputCheckerMiddleware;
 
 /**
  * Fichier de configuration des routes
@@ -82,7 +83,8 @@ return [
     'params' => [],
     'titleMenu' => '',
     'middlewares' => [
-      new AuthMiddleware(['/users/add'])
+      new AuthMiddleware(['/users/add']),
+      new InputCheckerMiddleware(['/users/add'])
     ]
   ],
   [
