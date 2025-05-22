@@ -64,6 +64,10 @@ CREATE TABLE users (
 -- Insérer un utilisateur de test (admin/admin)
 INSERT INTO users (login, password, email) VALUES ('admin', 'admin', 'admin@example.com');
 ```
+ou si hashage
+```sql
+INSERT INTO users (login, password, email) VALUES ('admin', '$2y$10$9XWuYcgATZXjjpJT5LsA6.L6lNCsLRpBB9dhGN8Lz0VeKH2NQURty', 'admin@example.com');
+````
 ## Avantages du pattern Repository
 
 - Séparation des préoccupations : La logique d'accès aux données est isolée du reste de l'application
