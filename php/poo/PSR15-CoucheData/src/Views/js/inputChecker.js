@@ -7,8 +7,8 @@
 function checkPassword(password) {
 
   let conditionsNotMet = [];
-  if (password.length < 10) {
-    conditionsNotMet.push('Minimum 10 caractères');
+  if (password.length < 12) {
+    conditionsNotMet.push('Minimum 12 caractères');
   }
   if (!/[a-z]/.test(password)) {
     conditionsNotMet.push('Au moins une minuscule');
