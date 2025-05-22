@@ -37,9 +37,9 @@ class InputCheckerMiddleware implements MiddlewareInterface
         1 chiffre de 0 à 9
         1 lettre de a à z minuscule
         1 lettre de A à Z majuscule
-        le tout doit faire au moins 10 caractères
+        le tout doit faire au moins 12 caractères
       */
-      $pattern = "~(?=.*[*&@!?$])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{10,}~";
+      $pattern = "~(?=.*[*&@!?$])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{12,}~";
 
       // Cas favorable -> je passe au middleware suivant
       if (preg_match($pattern, $parsedBody["password"])) {
