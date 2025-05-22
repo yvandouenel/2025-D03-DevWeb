@@ -45,7 +45,7 @@ class AuthMiddleware implements MiddlewareInterface
     foreach ($this->protectedRoutes as $protectedRoute) {
       error_log("chemin : " . $path);
       error_log("protectedRoute : " . $protectedRoute);
-      if (strpos($protectedRoute, $path) === 0) {
+      if (strpos($path, $protectedRoute) === 0) {
         // Si $_SESSION['failed_login_attempt'] > 3 alors je ne teste pas si l'utilisateur est authentifié, je renvoie directement un message
         // indiquant qu'il est black listé
         if (isset($_SESSION['failed_login_attempt']) && $_SESSION['failed_login_attempt'] > 3) {
