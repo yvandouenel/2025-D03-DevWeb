@@ -15,6 +15,12 @@ use GuzzleHttp\Psr7\Response;
 
 // Démarrer la session dans laquelle on peut stocker des infos concernant un même client (navigateur)
 session_start();
+// Création du timestamp
+if (!isset($_SESSION['created_at'])) {
+  $_SESSION['created_at'] = time();
+}
+
+
 
 
 // Chemins relatifs à la racine du projet
@@ -82,6 +88,8 @@ foreach ($routes as $route) {
 // Traitement de la requête actuelle
 $request = ServerRequest::fromGlobals();
 $emitter = new ResponseEmitter();
+
+
 
 try {
   // Dispatch de la route

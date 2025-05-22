@@ -36,11 +36,16 @@ class AuthMiddleware implements MiddlewareInterface
   {
     $path = $request->getUri()->getPath();
 
+    // Gestion du temps de la session. Si la durée est expirée, je renvoie vers le login
+    if (time() - $_SESSION['created_at'] > 1440) {
+      session_destroy();
+    }
+
     // Vérifiez si la route actuelle est protégée
     foreach ($this->protectedRoutes as $protectedRoute) {
       if (strpos($path, $protectedRoute) === 0) {
-        // Ici, mettre la logique d'authentification
-        // Par exemple, vérifier si l'utilisateur est connecté via une session
+        // Si $_SESSION['failed_login_attempt'] > 3 alors je ne teste pas si l'utilisateur est authentifié, je renvoie directement un message
+        // indiquant qu'il est black listé
         if (isset($_SESSION['failed_login_attempt']) && $_SESSION['failed_login_attempt'] > 3) {
           // Récupération de l'instance de NavigationService
           $navService = ServiceLocator::get("navService");
@@ -59,6 +64,8 @@ class AuthMiddleware implements MiddlewareInterface
           );
         }
 
+        // Ici, mettre la logique d'authentification
+        // Par exemple, vérifier si l'utilisateur est connecté via une session
 
         if (!$this->isAuthenticated($request)) {
           if (!isset($_SESSION['failed_login_attempt'])) {
@@ -70,8 +77,8 @@ class AuthMiddleware implements MiddlewareInterface
           }
           // Redirection vers la page de connexion ou message d'erreur
           return new Response(
-            401,
-            ['Content-Type' => 'text/html'],
+            302,
+            ['Location' => '/login'],
             '<h1>401 - Non autorisé</h1><p>Vous devez être connecté pour accéder à cette page.</p>'
           );
         }

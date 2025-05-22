@@ -15,7 +15,9 @@ class ResponseEmitter
       'X-XSS-Protection' => '1; mode=block',
       'Cache-Control' => 'no-store, no-cache, must-revalidate',
       'Pragma' => 'no-cache',
-      'Expires' => '0'
+      'Expires' => '0',
+      'X-Session-Duration' => ini_get('session.gc_maxlifetime'),
+      'X-Cookie-Duration' => ini_get('session.cookie_lifetime')
     ];
     // Ajoute les headers par défaut s'ils ne sont pas déjà définis
     foreach ($defaultHeaders as $name => $value) {
