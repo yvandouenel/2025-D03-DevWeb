@@ -46,6 +46,15 @@ class UserController extends Controller
   {
 
     $title =  "Ajout d'un utilisateur";
+
+    // Ajout d'un fonction que l'on pourra appeler dans le template twig
+    // Cette fonction a simplement pour rôle de donner le bon chemin vers le fichier javascript souhaité
+
+    $function = new \Twig\TwigFunction('asset', function ($jsFileName) {
+      return '/src/Views/js/' . $jsFileName;
+    });
+    $this->twig->addFunction($function);
+
     $html = $this->twig->render('users/addForm.twig', [
       'title' => $title,
       'links' => $this->navService->routesToLinks('/'),

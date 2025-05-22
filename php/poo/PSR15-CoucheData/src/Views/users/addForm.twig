@@ -12,7 +12,9 @@
 				</div>
 
 				<div class="form-floating mb-3">
-					<input type="password" class="form-control" id="password" name="password" required>
+					<input oninput="checkPassword(this.value)" pattern="(?=.*[*&@!?$])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{10,}" type="password" class="form-control" id="password">
+					<div id="error-message"></div>
+
 					<label for="password">Password</label>
 				</div>
 
@@ -27,6 +29,6 @@
 			</div>
 		</div>
 	</form>
-
+	 <script defer type="text/javascript" src="{{ asset('inputChecker.js') }}"></script>
 
 {% endblock %}
