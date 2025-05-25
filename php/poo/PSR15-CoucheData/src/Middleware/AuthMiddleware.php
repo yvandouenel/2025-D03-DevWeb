@@ -34,10 +34,14 @@ class AuthMiddleware implements MiddlewareInterface
    */
   public function process(ServerRequestInterface $request, callable $next): ResponseInterface
   {
-    $path = $request->getUri()->getPath();
 
+    $path = $request->getUri()->getPath();
+    // S'assurer qu'une session est active
+    if (session_status() === PHP_SESSION_NONE) {
+      session_start();
+    }
     // Gestion du temps de la session. Si la durée est expirée, je renvoie vers le login
-    if (time() - $_SESSION['created_at'] > 1440) {
+    if (time() - $_SESSION['created_at'] > 60) {
       session_destroy();
     }
 
@@ -45,7 +49,9 @@ class AuthMiddleware implements MiddlewareInterface
     foreach ($this->protectedRoutes as $protectedRoute) {
       error_log("chemin : " . $path);
       error_log("protectedRoute : " . $protectedRoute);
-      if (strpos($path, $protectedRoute) === 0) {
+      if ($path === $protectedRoute) {
+        error_log("protectedRoute et path correspondent");
+
         // Si $_SESSION['failed_login_attempt'] > 3 alors je ne teste pas si l'utilisateur est authentifié, je renvoie directement un message
         // indiquant qu'il est black listé
         if (isset($_SESSION['failed_login_attempt']) && $_SESSION['failed_login_attempt'] > 3) {
@@ -121,11 +127,13 @@ class AuthMiddleware implements MiddlewareInterface
 
       if ($user) {
         // Authentification réussie - stocker dans la session
-
+        error_log("Authentification réussie");
         $_SESSION['user_authenticated'] = true;
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_login'] = $user->login;
         return true;
+      } else {
+        error_log("Echec de l'authentification");
       }
     }
 
