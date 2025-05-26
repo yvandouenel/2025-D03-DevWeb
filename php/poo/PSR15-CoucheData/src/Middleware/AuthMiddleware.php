@@ -41,7 +41,7 @@ class AuthMiddleware implements MiddlewareInterface
       session_start();
     }
     // Gestion du temps de la session. Si la durée est expirée, je renvoie vers le login
-    if (time() - $_SESSION['created_at'] > 60) {
+    if (time() - $_SESSION['created_at'] > 1440) {
       session_destroy();
     }
 

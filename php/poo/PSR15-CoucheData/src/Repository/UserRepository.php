@@ -68,7 +68,7 @@ class UserRepository extends AbstractRepository
         'email' => $entity->email
       ]);
     } else {
-      // Création
+      // Création d'une requête préparée
       $stmt = $this->db->prepare("
                 INSERT INTO {$this->table} (login, password, email, created_at) 
                 VALUES (:login, :password, :email, NOW())

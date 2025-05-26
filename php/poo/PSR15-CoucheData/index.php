@@ -54,13 +54,14 @@ $router->addMiddleware($authMiddleware);
 // Après le middleware d'authentification
 
 // Ajout d'un middleware global pour la sécurisation des entrées
-/* $inputSanitizerMiddleware = new InputSanitizerMiddleware([
+$inputSanitizerMiddleware = new InputSanitizerMiddleware([
+  'escape_sql' => false,
   'strip_tags' => true,
   'allow_html' => ['p', 'strong', 'em'], // Balises HTML autorisées, si nécessaire
   'excluded_keys' => ['password', 'csrf_token'], // Clés à exclure du nettoyage
   'excluded_routes' => ['/api/webhook'] // Routes à exclure si nécessaire
 ]);
-$router->addMiddleware($inputSanitizerMiddleware); */
+$router->addMiddleware($inputSanitizerMiddleware);
 
 // Chargement des routes depuis le fichier routes.php
 $routes = require_once __DIR__ . '/src/Router/routes.php';
