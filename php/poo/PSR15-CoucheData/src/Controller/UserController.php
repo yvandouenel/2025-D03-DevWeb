@@ -165,6 +165,15 @@ class UserController extends Controller
   }
   public function displayFormEdit(ServerRequestInterface $request, array $routeParams = [])
   {
+
+    $tokenService = ServiceLocator::get("tokenService");
+    $token = $tokenService->createToken();
+
+
+    $function = new \Twig\TwigFunction('asset', function ($jsFileName) {
+      return '/src/Views/js/' . $jsFileName;
+    });
+    $this->twig->addFunction($function);
     // Récupération de l'id qui provient de la requête (le paramètre de la route)
     $id = $routeParams["id"];
 
@@ -177,7 +186,8 @@ class UserController extends Controller
       $html = $this->twig->render('users/updateForm.twig', [
         'title' => $title,
         'links' => $this->navService->routesToLinks('/users'),
-        'user' => $user
+        'user' => $user,
+        'token' => $token,
       ]);
 
       // Si je n'ai pas d'utilisateur, je renvoie une erreur 404

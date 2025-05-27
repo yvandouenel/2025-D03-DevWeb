@@ -64,11 +64,11 @@ class UserRepository extends AbstractRepository
       return $stmt->execute([
         'id' => $entity->id,
         'login' => $entity->login,
-        'password' => $entity->password,
+        'password' => password_hash($entity->password, PASSWORD_BCRYPT),
         'email' => $entity->email
       ]);
     } else {
-      // Création d'une requête préparée
+      // Création d'une requête préparée ou paramétrée
       $stmt = $this->db->prepare("
                 INSERT INTO {$this->table} (login, password, email, created_at) 
                 VALUES (:login, :password, :email, NOW())
