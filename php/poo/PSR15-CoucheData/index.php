@@ -10,9 +10,12 @@ use Diginamic\Framework\Middleware\AuthMiddleware;
 use Diginamic\Framework\Middleware\InputSanitizerMiddleware;
 use Diginamic\Framework\Services\NavigationService;
 use Diginamic\Framework\Services\ServiceLocator;
+use Diginamic\Framework\Services\TokenService;
 use GuzzleHttp\Psr7\ServerRequest;
 use GuzzleHttp\Psr7\Response;
 
+// Utilisation d'un cookie httponly afin d'empêcher le javascript d'y accéder
+ini_set('session.cookie_httponly', 1);
 // Démarrer la session dans laquelle on peut stocker des infos concernant un même client (navigateur)
 session_start();
 // Création du timestamp
@@ -34,6 +37,10 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 // Assigne la clé "twig" et la valeur $twig à l'attribut static $services
 ServiceLocator::set('twig', $twig);
 
+// Ajout du service token
+$tokenService = new TokenService();
+ServiceLocator::set('tokenService', $tokenService);
+
 // Chargement des variables d'environnement
 $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -45,8 +52,7 @@ $router = new Router();
 $authMiddleware = new AuthMiddleware([
   '/login-post',
   '/users',
-  /*  '/profile',
-  '/users', */
+
   // Ajoutez ici d'autres routes protégées
 ]);
 $router->addMiddleware($authMiddleware);

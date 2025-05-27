@@ -5,6 +5,7 @@ namespace Diginamic\Framework\Controller;
 use Diginamic\Framework\Model\User;
 use Diginamic\Framework\Repository\UserRepository;
 use Diginamic\Framework\Services\NavigationService;
+use Diginamic\Framework\Services\ServiceLocator;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Psr7\Response;
@@ -44,7 +45,8 @@ class UserController extends Controller
 
   public function displayAddForm(ServerRequestInterface $request): ResponseInterface
   {
-
+    $tokenService = ServiceLocator::get("tokenService");
+    $token = $tokenService->createToken();
     $title =  "Ajout d'un utilisateur";
 
     // Ajout d'un fonction que l'on pourra appeler dans le template twig
@@ -58,6 +60,7 @@ class UserController extends Controller
     $html = $this->twig->render('users/addForm.twig', [
       'title' => $title,
       'links' => $this->navService->routesToLinks('/'),
+      'token' => $token,
 
     ]);
 

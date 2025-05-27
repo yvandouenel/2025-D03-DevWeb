@@ -40,11 +40,29 @@ class AuthMiddleware implements MiddlewareInterface
     if (session_status() === PHP_SESSION_NONE) {
       session_start();
     }
+    // Récupération de l'instance de twig
+    $twig = ServiceLocator::get("twig");
+
+    $navService = ServiceLocator::get("navService");
     // Gestion du temps de la session. Si la durée est expirée, je renvoie vers le login
     if (time() - $_SESSION['created_at'] > 1440) {
       session_destroy();
     }
-
+    // Si la requête est une soumission de formulaire utilisant la méthode post alors il faut un token
+    if ($request->getMethod() === 'POST') {
+      $formData = $request->getParsedBody();
+      if ($_SESSION["token"] !==  $formData['token']) {
+        $html = $twig->render('error/index.twig', [
+          'title' => "Problème de sécurité",
+          'links' => $navService->routesToLinks('/users'),
+        ]);
+        return new Response(
+          400,
+          ['Content-Type' => 'text/html'],
+          $html
+        );
+      }
+    }
     // Vérifiez si la route actuelle est protégée
     foreach ($this->protectedRoutes as $protectedRoute) {
       error_log("chemin : " . $path);
@@ -56,10 +74,9 @@ class AuthMiddleware implements MiddlewareInterface
         // indiquant qu'il est black listé
         if (isset($_SESSION['failed_login_attempt']) && $_SESSION['failed_login_attempt'] > 3) {
           // Récupération de l'instance de NavigationService
-          $navService = ServiceLocator::get("navService");
 
-          // Récupération de l'instance de twig
-          $twig = ServiceLocator::get("twig");
+
+
 
           $html = $twig->render('error/index.twig', [
             'title' => "Tu es blacklisté mon vieux",
