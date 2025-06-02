@@ -43,6 +43,7 @@ class InputSanitizerMiddleware implements MiddlewareInterface
    */
   public function process(ServerRequestInterface $request, callable $next): ResponseInterface
   {
+    error_log("DANS InputSanitizerMiddleware xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     // Vérifier si la route actuelle doit être exclue
     $path = $request->getUri()->getPath();
     foreach ($this->options['excluded_routes'] as $excludedRoute) {

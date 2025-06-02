@@ -5,6 +5,8 @@
 	<h2>{{title}}</h2>
 
 	<form method="post" action="/users/update/{{ user.id}}" class="container py-4">
+		<input type="hidden" name="token" value="{{ token }}">
+
 		<div class="row mb-3">
 			<div class="col-md-6">
 				<div class="form-floating mb-3">
@@ -14,9 +16,11 @@
 				</div>
 
 				<div class="form-floating mb-3">
-					<input type="password" class="form-control" id="password" value="{{ user.password}}" name="password" required>
+					<input oninput="checkPassword(this.value)" type="password" class="form-control" id="password" value="{{ user.password}}" name="password" required>
 
 					<label for="password">Password</label>
+					<div id="error-message" class="text-danger ms-2"></div>
+
 				</div>
 
 				<div class="form-floating mb-3">
@@ -31,5 +35,6 @@
 			</div>
 		</div>
 	</form>
+	 <script defer type="text/javascript" src="{{ asset('inputChecker.js') }}"></script>
 
 {% endblock %}

@@ -9,7 +9,7 @@ interface MiddlewareInterface
 {
   /**
    * Traite une requête http entrante et retourne une réponse.
-   * Délègue éventuellement la création de la réponse à un "gestionnaire"
+   * Délègue éventuellement la création de la réponse à un "gestionnaire" (le middleware suivant)
    *
    * @param ServerRequestInterface $request
    * @param callable $next The next middleware/handler to be called

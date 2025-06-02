@@ -3,6 +3,7 @@
 {% block content %}
 	<h2>{{ title }}</h2>
 	<form method="post" action="/users/add" class="container py-4">
+		<input type="hidden" name="token" value="{{ token }}">
 		<div class="row">
 			<div class="col-md-6">
 
@@ -12,7 +13,11 @@
 				</div>
 
 				<div class="form-floating mb-3">
-					<input type="password" class="form-control" id="password" name="password" required>
+					<input oninput="checkPassword(this.value)" name="password" type="password" class="form-control" id="password" required>
+
+
+					<div id="error-message" class="text-danger ms-2"></div>
+
 					<label for="password">Password</label>
 				</div>
 
@@ -27,6 +32,6 @@
 			</div>
 		</div>
 	</form>
-
+	 <script defer type="text/javascript" src="{{ asset('inputChecker.js') }}"></script>
 
 {% endblock %}

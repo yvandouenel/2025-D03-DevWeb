@@ -4,6 +4,7 @@ use Diginamic\Framework\Controller\HomeController;
 use Diginamic\Framework\Controller\LoginController;
 use Diginamic\Framework\Controller\UserController;
 use Diginamic\Framework\Middleware\AuthMiddleware;
+use Diginamic\Framework\Middleware\InputCheckerMiddleware;
 
 /**
  * Fichier de configuration des routes
@@ -60,7 +61,7 @@ return [
     'params' => [],
     'titleMenu' => 'Gestion des utilisateurs',
     'middlewares' => [
-      // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
+      //new AuthMiddleware(['/users'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
     ]
   ],
   [
@@ -92,9 +93,7 @@ return [
     'httpMethod' => 'POST',
     'params' => [],
     'titleMenu' => '',
-    'middlewares' => [
-      new AuthMiddleware(['/users/add'])
-    ]
+    'middlewares' => []
   ],
   [
     'path' => '/users/update/{id}',
