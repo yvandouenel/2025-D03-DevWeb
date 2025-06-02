@@ -75,4 +75,10 @@ INSERT INTO users (login, password, email) VALUES ('admin', '$2y$10$9XWuYcgATZXj
 - Réutilisabilité : Les méthodes communes sont dans la classe abstraite et peuvent être utilisées par tous les repositories
 - Extensibilité : Vous pouvez facilement ajouter de nouvelles méthodes spécifiques à chaque type d'entité
 
-
+# Couche sécurité
+Dans cette couche, nous nous sommes assurés que :
+- le mot de passe fait au moins 12 caractères et qu'il comprend des lettres majuscules, minuscules, un nombre et un caractère spécial
+- l'utilisateur ne peut pas tenter de s'identifier  plus de 3 fois 
+- l'application est protégée contre les injections sql (requête préparée)
+- l'application est protégée contre les injections xss (via le middleware qui enlève les balises)
+- l'application est protégée contre les failles CSRF (via un token ajouté dans chaque formulaire qui emploie la méthode POST)
