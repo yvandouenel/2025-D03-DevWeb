@@ -41,6 +41,34 @@ class UserController extends Controller
       $html
     );
   }
+  public function findOne(ServerRequestInterface $request, array $routeParams = []): ResponseInterface
+  {
+
+    $title = "Vue d'un utilisateur";
+    // Récupération de l'id qui provient de la requête (le paramètre de la route)
+    $id = $routeParams["id"];
+    if (isset($id)) {
+
+      $user = $this->userRepository->findById($id);
+
+      $html = $this->twig->render('users/oneUser.twig', [
+        'title' => $title,
+        'links' => $this->navService->routesToLinks('/users'),
+        'user' => $user
+      ]);
+
+      return new Response(
+        200,
+        ['Content-Type' => 'text/html'],
+        $html
+      );
+    }
+    return new Response(
+      400,
+      ['Content-Type' => 'text/html'],
+      "<h1>Utilisateur inconnu</h1>"
+    );
+  }
 
   public function displayAddForm(ServerRequestInterface $request): ResponseInterface
   {
