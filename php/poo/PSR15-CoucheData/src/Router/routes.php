@@ -65,6 +65,17 @@ return [
     ]
   ],
   [
+    'path' => '/users/{id}',
+    'controller' => UserController::class,
+    'controllerMethod' => 'findOne',
+    'httpMethod' => 'GET',
+    'params' => [],
+    'titleMenu' => '',
+    'middlewares' => [
+      // new AuthMiddleware(['/admin'])  // Ceci n'est pas nécessaire car la liste a été ajoutée en début du fichier index.php
+    ]
+  ],
+  [
     'path' => '/users/add',
     'controller' => UserController::class,
     'controllerMethod' => 'displayAddForm',
