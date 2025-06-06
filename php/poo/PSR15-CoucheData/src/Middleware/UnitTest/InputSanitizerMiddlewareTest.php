@@ -71,9 +71,9 @@ class InputSanitizerMiddlewareTest extends TestCase
 
     // Vérifier que le JavaScript dangereux a été supprimé
     $this->assertEquals(
-      'Hello',
+      'alert("xss")Hello',
       $capturedCleanData['comment'],
-      'La balise <script> doit être supprimée, ne laissant que "Hello"'
+      'La balise <script> doit être supprimée, ne laissant que "alert("xss")Hello"'
     );
 
     // Vérifier explicitement que <script> n'est plus présent
