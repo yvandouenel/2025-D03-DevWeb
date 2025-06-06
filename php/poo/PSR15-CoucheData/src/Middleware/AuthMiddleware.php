@@ -51,7 +51,7 @@ class AuthMiddleware implements MiddlewareInterface
     // Si la requête est une soumission de formulaire utilisant la méthode post alors il faut un token
     if ($request->getMethod() === 'POST') {
       $formData = $request->getParsedBody();
-      if ($_SESSION["token"] !==  $formData['token']) {
+      if (isset($_SESSION["token"]) && $_SESSION["token"] !==  $formData['token']) {
         $html = $twig->render('error/index.twig', [
           'title' => "Problème de sécurité",
           'links' => $navService->routesToLinks('/users'),
