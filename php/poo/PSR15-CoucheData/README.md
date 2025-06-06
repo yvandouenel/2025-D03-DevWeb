@@ -9,31 +9,32 @@ se placer dans le répertoire contenant index.php et lancer
 
 # Explications
 Cet exemple a pour but de montrer :
- - comment on peut récupérer les données issues d'une requête HTTP via GuzzleHttp
- - Renvoyer des infos sur la requette HTTP, en l'occurence 
-  - Scheme (protocole)
-  - Host (domaine)
-  - Port
-  - Path
-  - QueryString
-  - Fragment (ancre) 
- - les infos sont renvoyées en faisant un echo du body de $response. $response est une instance de use GuzzleHttp\Psr7\Response qui est retournée par la méthode handleRequest()
-# Tests
+ - Comment on peut récupérer les données issues d'une requête HTTP dans le cadre des PSR (GuzzleHttp)
+ - Utiliser un système de route pour savoir 
+   - quel middleware doit être appelé
+   - quelle méthode de quel contrôleur doit être appelée. 
+ - Le contrôleur :
+   - utilise un "Repository" qui fera le lien entre la base de données et le modèle grâce à l'utilisation de PDO.
+   - renvoie une réponse HTTP toujours dans le cadres des PSR et à l'aide de templates (twig)
+
+# Routes
+Les routes sont déclarées dans le fichier src/Router/routes.php
+Les middlewares sont associés à des routes soit dans le fichier index.php soit dans le fichier src/Router/routes.php
+## Ordre de déclaration des routes
+ATTENTION, l'ordre de déclaration des routes dans le fichier src/Router/routes.php a un impact conséquent.
+Par exemple, la route ayant pour chemin /users/add doit impérativement être déclarée avant la route qui a pour chemin /users/{id}.
+Sinon, la route /users/add ne sera jamais reconnue (car elle correspond également à la route /users/{id})
+# Premières requêtes
 A tester avec diverses url. Ex :
-``http://localhost:3000/chemin?name=toto#chap1``
+``http://localhost:3000/users``
 ou 
-``curl -v http://localhost:3000/`` -v pour verbose pour donner un maximum d'informations notamment sur le header
+``curl -v http://localhost:3000/login`` -v pour verbose pour donner un maximum d'informations notamment sur le header
 
 Attention, les résultats peuvent être différents en fonction de votre OS et de la version de php. Cf [https://www.php.net/manual/fr/features.commandline.webserver.php] 
 
-# Remarques 
-Cette approche :
- - Encapsule la logique d'envoi de réponse
- - Gère proprement les headers et le status code
- - Se rapproche conceptuellement de l'approche Node.js et c'est l'approche adoptée par plusieurs frameworks PHP modernes comme Slim ou Laminas (ex-Zend).
 
- # Couche Data
-Dans cette version, nous mettons en place le "pattern Repository" pour séparer la logique d'accès aux données du reste de l'application. Nous allons implémenter ce design pattern avec PDO et FETCH_CLASS.
+# Couche Data
+Nous avons mis en place le "pattern Repository" pour séparer la logique d'accès aux données du reste de l'application. Nous allons implémenter ce design pattern avec PDO et FETCH_CLASS.
 
 Pour cela, nous allons créer : 
 - le fichier .env. Attention à avoir 
