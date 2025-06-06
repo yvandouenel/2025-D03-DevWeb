@@ -57,7 +57,7 @@ class Route
   /**
    * Vérifie si la route correspond au chemin donné
    */
-  public function matches(string $path, bool $onlyNumeric = true): bool
+  public function matches(string $path): bool
   {
     // Transformation du chemin de la route en expression régulière
     // On remplace les paramètres {param} par des groupes de capture
@@ -67,7 +67,7 @@ class Route
     $pattern = preg_quote($pattern, '#');
 
     // Remplacer les paramètres {param} par des groupes de capture
-    $pattern = $onlyNumeric ? preg_replace('#\\\{([0-9]+)\\\}#', '(?P<$1>[^/]+)', $pattern) : preg_replace('#\\\{([a-zA-Z0-9_]+)\\\}#', '(?P<$1>[^/]+)', $pattern);
+    $pattern = preg_replace('#\\\{([a-zA-Z0-9_]+)\\\}#', '(?P<$1>[^/]+)', $pattern);
 
     // Ajouter les délimiteurs et les ancres
     $pattern = '#^' . $pattern . '$#';
