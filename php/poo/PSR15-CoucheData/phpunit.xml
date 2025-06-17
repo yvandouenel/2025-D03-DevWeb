@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit colors="true" verbose="true" testdox="true">
+  <testsuites>
+    <testsuite name="My Test Suite">
+      <directory>./src/Services/UnitTest/</directory>
+      <directory>./src/Middleware/UnitTest/</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>
