@@ -6,11 +6,13 @@
   {{ tasks | slice : 0 : 1 | json }}
   <!-- Parcours du tableau d'objets littéraux de tâches -->
   <ul>
-    <li
-      *ngFor="let task of tasks"
-      [ngClass]="{ done: task.done, 'not-done': !task.done }"
-    >
-      {{ task.name }}
+    <li *ngFor="let task of tasks" class="d-flex gap-3 my-3">
+      <h2 [ngClass]="{ done: task.done, 'not-done': !task.done }">
+        {{ task.name }}
+      </h2>
+      <button class="btn btn-success" (click)="onClickValidate()">
+        Valider
+      </button>
     </li>
   </ul>
 

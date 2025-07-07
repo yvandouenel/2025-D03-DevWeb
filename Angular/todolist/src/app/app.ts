@@ -28,4 +28,10 @@ export class App {
   ];
   protected fontWeight = 'bold';
   protected color = 'green';
+
+  // Méthodes
+  onClickValidate() {
+    console.log(`click sur bouton Valider`);
+    // utiliser map pour modifier tasks (attention, map est une fonction pure). Pour modifier la tâche cliquée, on va s'appuyer sur la propriété id
+  }
 }
