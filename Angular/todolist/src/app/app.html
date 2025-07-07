@@ -1,0 +1,6 @@
+<h1>{{ title }}</h1>
+<!-- Parcourt le tableau d'objets littéraux de tâches -->
+<ul *ngFor="let task of tasks">
+  <li>{{ task.name }}</li>
+</ul>
+<router-outlet />
