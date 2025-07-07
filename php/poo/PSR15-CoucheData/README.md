@@ -83,3 +83,34 @@ Dans cette couche, nous nous sommes assurés que :
 - l'application est protégée contre les injections sql (requête préparée)
 - l'application est protégée contre les injections xss (via le middleware qui enlève les balises)
 - l'application est protégée contre les failles CSRF (via un token ajouté dans chaque formulaire qui emploie la méthode POST)
+
+# Tests unitaires
+## Installation
+```bash
+composer require --dev phpunit/phpunit
+```
+## Création d'un premier test 
+Le principe du premier test est de vérifier que le middleware InputSanitizer supprime bien les balises script qui pourraient être envoyées lors d'une requête HTTP avec la méthode POST.
+Ce premier test est implémenté dans src/Middleware/UnitTest
+## Lancer un premier test
+```bash
+ vendor/bin/phpunit src/Middleware/UnitTest/InputSanitizerMiddlewareTest.php --color --testdox
+```
+
+## Lancer tous les tests
+Il faut d'abord créer le fichier phpunit.xml
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit colors="true" verbose="true" testdox="true">
+  <testsuites>
+    <testsuite name="My Test Suite">
+      <directory>./src/Services/UnitTest/</directory>
+      <directory>./src/Middleware/UnitTest/</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>
+````
+puis pour lancer tous les tests :
+```bash
+vendor/bin/phpunit
+```
