@@ -1,0 +1,7 @@
+<h1>{{ title }}</h1>
+<!-- Affichage des tâches -->
+<ul>
+  <li *ngFor="let task of tasks" class="d-flex gap-3 my-3">
+    <digi-task [taskFromParent]="task"></digi-task>
+  </li>
+</ul>

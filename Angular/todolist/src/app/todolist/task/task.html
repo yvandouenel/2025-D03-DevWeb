@@ -1,0 +1,17 @@
+<div class="d-flex gap-3 my-3">
+  <h2
+    [ngClass]="{ done: taskFromParent.done, 'not-done': !taskFromParent.done }"
+  >
+    {{ taskFromParent.name }}
+  </h2>
+  <button
+    [ngClass]="{
+      'btn-success': !taskFromParent.done,
+      'btn-warning': taskFromParent.done
+    }"
+    class="btn"
+    (click)="onClickValidate()"
+  >
+    {{ taskFromParent.done ? "Invalider" : "Valider" }}
+  </button>
+</div>
