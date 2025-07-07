@@ -10,12 +10,13 @@ import { TaskInterface } from '../interfaces/TaskInterface';
   styleUrl: './app.css',
 })
 export class App {
+  protected date: Date = new Date();
   protected title: string = 'Todolist';
   protected tasks: TaskInterface[] = [
     {
       id: '1',
       name: 'Faire la vaisselle',
-      done: false,
+      done: true,
       comment:
         'Dépêche toi mon lapin, je ne supporte pas de voir traîner la vaisselle',
     },
@@ -25,4 +26,6 @@ export class App {
       done: false,
     },
   ];
+  protected fontWeight = 'bold';
+  protected color = 'green';
 }
