@@ -10,7 +10,7 @@
       <h2 [ngClass]="{ done: task.done, 'not-done': !task.done }">
         {{ task.name }}
       </h2>
-      <button class="btn btn-success" (click)="onClickValidate()">
+      <button class="btn btn-success" (click)="onClickValidate(task.id)">
         Valider
       </button>
     </li>

@@ -30,8 +30,12 @@ export class App {
   protected color = 'green';
 
   // Méthodes
-  onClickValidate() {
-    console.log(`click sur bouton Valider`);
+  onClickValidate(id: string) {
+    console.log(`click sur bouton Valider`, id);
     // utiliser map pour modifier tasks (attention, map est une fonction pure). Pour modifier la tâche cliquée, on va s'appuyer sur la propriété id
+    this.tasks = this.tasks.map((task) => {
+      if (task.id == id) task.done = !task.done;
+      return task;
+    });
   }
 }
