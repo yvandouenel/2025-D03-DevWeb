@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { TaskInterface } from '../../../interfaces/TaskInterface';
 
 @Component({
@@ -9,9 +9,12 @@ import { TaskInterface } from '../../../interfaces/TaskInterface';
   styleUrl: './task.css',
 })
 export class Task {
-  @Input() taskFromParent!: TaskInterface;
+  taskFromParent = input<TaskInterface>();
   onClickValidate() {
-    // Modifications de this.tasks
-    this.taskFromParent.done = !this.taskFromParent.done;
+    // Get the signal value first
+    const task = this.taskFromParent();
+    if (task) {
+      task.done = !task.done;
+    }
   }
 }
