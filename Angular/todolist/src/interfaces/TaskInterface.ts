@@ -4,3 +4,6 @@ export interface TaskInterface {
   done: boolean;
   comment?: string;
 }
+
+//  interface qui indique une sous-partie de TaskInterface
+export interface PartialTaskInterface extends Partial<TaskInterface> {}

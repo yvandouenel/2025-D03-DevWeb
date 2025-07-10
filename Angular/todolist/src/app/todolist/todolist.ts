@@ -24,6 +24,7 @@ export class Todolist {
     // Vla la souscription
     this.dataTasksService.loadTasks().subscribe({
       next: (tasks: TaskInterface[]) => {
+        console.log(`Next : Donnée issue de l'obersable reçue`);
         this.tasks = tasks;
       },
       error: (error) => {
@@ -33,7 +34,7 @@ export class Todolist {
         );
       },
       complete: () => {
-        console.log(`Observable issu de loadTasks terminé`);
+        console.log(`Complete : Observable issu de loadTasks terminé`);
       },
     });
   }
