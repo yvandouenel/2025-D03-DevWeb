@@ -13,7 +13,10 @@ export class Task {
   taskFromParent = input<TaskInterface>();
   errorMsg = '';
   constructor(private dataTasksService: DataTasksService) {}
-
+  ngOnChanges(changes: any) {
+    // changes.prop contains the old and the new value...
+    console.log(`changes`, changes);
+  }
   onClickToggleValidate() {
     // Get the signal value first
     const task = this.taskFromParent();
@@ -21,7 +24,7 @@ export class Task {
       // Toggle sur la propriété done (on inverse)
       task.done = !task.done;
       // Appel de la méthode du service qui renvoie un observable : Donc il faut s'abonner !
-      this.dataTasksService.patchTasks(task.id, { done: task.done }).subscribe({
+      this.dataTasksService.patchTask(task.id, { done: task.done }).subscribe({
         next: (data) => {
           console.log(`data depuis onClickValidate : `, data);
         },

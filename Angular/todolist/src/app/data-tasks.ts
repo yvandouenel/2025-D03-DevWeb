@@ -4,12 +4,13 @@ import {
   TaskInterface,
 } from '../interfaces/TaskInterface';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataTasksService {
+  private formValues$ = new Subject<any>();
   static url = 'http://localhost:3000/tasks';
   constructor(private http: HttpClient) {}
   loadTasks(): Observable<TaskInterface[]> {
@@ -18,7 +19,7 @@ export class DataTasksService {
       params,
     });
   }
-  patchTasks(
+  patchTask(
     id: string,
     modifiedObject: PartialTaskInterface
   ): Observable<TaskInterface> {
@@ -26,6 +27,22 @@ export class DataTasksService {
     return this.http.patch<TaskInterface>(
       DataTasksService.url + '/' + id,
       modifiedObject,
+      {
+        params,
+      }
+    );
+  }
+  setFormValues(values: any): void {
+    this.formValues$.next(values);
+  }
+  getFormValuesObservable(): Observable<any> {
+    return this.formValues$.asObservable();
+  }
+  postTask(newObject: PartialTaskInterface): Observable<TaskInterface> {
+    const params = { status: 'PENDING' };
+    return this.http.post<TaskInterface>(
+      DataTasksService.url + '/toto',
+      newObject,
       {
         params,
       }

@@ -1,7 +1,24 @@
 <form [formGroup]="formAddGroup" (ngSubmit)="onSubmit()">
   <label for="name" class="form-label">Titre</label>
-  <input type="text" class="form-control" id="name" name="name" />
+  <input
+    formControlName="name"
+    type="text"
+    class="form-control"
+    id="name"
+    name="name"
+  />
   <label for="comment" class="form-label">Description</label>
-  <textarea class="form-control" name="comment" id="comment"></textarea>
-  <button type="submit" class="btn btn-success my-4">Ajouter une tâche</button>
+  <textarea
+    formControlName="comment"
+    class="form-control"
+    name="comment"
+    id="comment"
+  ></textarea>
+  <button
+    [disabled]="!formAddGroup.valid"
+    type="submit"
+    class="btn btn-success my-4"
+  >
+    Ajouter une tâche
+  </button>
 </form>

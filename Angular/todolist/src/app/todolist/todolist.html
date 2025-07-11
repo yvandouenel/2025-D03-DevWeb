@@ -1,6 +1,7 @@
 <h1>{{ title }}</h1>
 <!-- Appel du composant formulaire -->
 <digi-form-add></digi-form-add>
+<p class="text-danger h2">{{ errorMsg }}</p>
 <!-- Affichage des tâches -->
 <ul>
   <li *ngFor="let task of tasks" class="d-flex gap-3 my-3">
