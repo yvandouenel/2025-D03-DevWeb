@@ -7,13 +7,14 @@
   >
     {{ taskFromParent()?.name }}
   </h2>
+  <p>{{ errorMsg }}</p>
   <button
     [ngClass]="{
       'btn-success': !taskFromParent()?.done,
       'btn-warning': taskFromParent()?.done
     }"
     class="btn"
-    (click)="onClickValidate()"
+    (click)="onClickToggleValidate()"
   >
     {{ taskFromParent()?.done ? "Invalider" : "Valider" }}
   </button>

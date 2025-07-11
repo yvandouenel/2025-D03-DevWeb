@@ -3,10 +3,11 @@ import { TaskInterface } from '../../interfaces/TaskInterface';
 import { CommonModule } from '@angular/common';
 import { Task } from './task/task';
 import { DataTasksService } from './../data-tasks';
+import { FormAdd } from './form-add/form-add';
 
 @Component({
   selector: 'digi-todolist',
-  imports: [CommonModule, Task],
+  imports: [CommonModule, Task, FormAdd],
 
   templateUrl: './todolist.html',
   styleUrl: './todolist.css',
