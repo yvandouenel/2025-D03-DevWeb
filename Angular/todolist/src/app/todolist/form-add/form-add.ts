@@ -31,7 +31,7 @@ export class FormAdd {
     console.log(`valeurs du formulaire`, this.formAddGroup.value);
 
     // Afficher les valeurs de la nouvelle tâche dans un template
-    // Ici on va émettre une valeur next d'un observable qui fait partie d'un service
+    // Ici on va émettre une valeur next d'un observable qui fait partie du service dataTaskService
     this.dataTasksService.setFormValues(this.formAddGroup.value);
 
     // Enregister cette nouvelle tâche dans la base de donnée (via json-server)

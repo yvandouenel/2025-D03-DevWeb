@@ -53,9 +53,10 @@ export class Todolist {
           ...dataFromForm,
           done: false,
         };
+        const localTaskId = Math.round(Math.random() * 100).toString();
         const newLocalTask = {
           ...newTask,
-          id: Math.round(Math.random() * 100).toString(),
+          id: localTaskId,
         };
         this.tasks.push(newLocalTask);
 
@@ -82,7 +83,7 @@ export class Todolist {
             }, 5000);
             // Revenir en arrière en supprimant la task que je viens d'ajouter dans tasks
             setTimeout(() => {
-              this.tasks.pop();
+              this.tasks = this.tasks.filter((task) => task.id != localTaskId);
             }, 4000);
           },
         });

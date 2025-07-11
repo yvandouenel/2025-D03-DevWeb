@@ -40,12 +40,8 @@ export class DataTasksService {
   }
   postTask(newObject: PartialTaskInterface): Observable<TaskInterface> {
     const params = { status: 'PENDING' };
-    return this.http.post<TaskInterface>(
-      DataTasksService.url + '/toto',
-      newObject,
-      {
-        params,
-      }
-    );
+    return this.http.post<TaskInterface>(DataTasksService.url, newObject, {
+      params,
+    });
   }
 }
