@@ -13,10 +13,7 @@ export class Task {
   taskFromParent = input<TaskInterface>();
   errorMsg = '';
   constructor(private dataTasksService: DataTasksService) {}
-  ngOnChanges(changes: any) {
-    // changes.prop contains the old and the new value...
-    console.log(`changes`, changes);
-  }
+
   onClickToggleValidate() {
     // Get the signal value first
     const task = this.taskFromParent();
@@ -47,5 +44,10 @@ export class Task {
     }
 
     // Appel du service qui va faire un requête http avec la méthode patch
+  }
+  onClickDelete(id: string = '') {
+    console.log(`Dans onClickDelete`, id);
+    // Emission de la notification next
+    this.dataTasksService.setDeleteTaskId(id);
   }
 }

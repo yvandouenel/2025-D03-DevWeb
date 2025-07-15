@@ -5,12 +5,6 @@
       "name": "Faire la vaisselle depuis db.json",
       "done": true,
       "comment": "Dépêche toi mon lapin, je ne supporte pas de voir traîner la vaisselle"
-    },
-    {
-      "id": "e79b",
-      "name": "Farie du vélo",
-      "comment": "Dans la nature",
-      "done": false
     }
   ]
 }

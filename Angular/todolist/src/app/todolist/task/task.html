@@ -18,4 +18,7 @@
   >
     {{ taskFromParent()?.done ? "Invalider" : "Valider" }}
   </button>
+  <button class="btn btn-danger" (click)="onClickDelete(taskFromParent()?.id)">
+    Supprimer
+  </button>
 </div>

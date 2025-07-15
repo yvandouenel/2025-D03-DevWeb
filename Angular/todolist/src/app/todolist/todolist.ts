@@ -17,7 +17,6 @@ import { FormAdd } from './form-add/form-add';
 })
 export class Todolist {
   // Propriétés
-  protected title: string = 'Todolist';
   protected tasks!: TaskInterface[];
   protected errorMsg: string = '';
 
@@ -91,6 +90,45 @@ export class Todolist {
       error: (error) => {
         console.log(
           `Erreur attrapée lors de la souscription à l'observable dasn todoList`
+        );
+      },
+    });
+
+    // Souscription à l'observable qui émet des valeurs via le bouton delelte d'une tâche
+    this.dataTasksService.getDeleteTaskIdObservable().subscribe({
+      next: (id: string) => {
+        console.log(`Dans next de getDeleteTaskIdObservable().subscribe`);
+        // Copie de la tâche qui est supprimée
+        let savedTask!: TaskInterface;
+        // Suppresion de la tâche en local en agissant sur this.tasks
+        this.tasks = this.tasks.filter((task) => {
+          // Pour passer le filtre, la tâche ne doit pas avoir pour identité id
+          if (task.id == id) savedTask = task;
+          return task.id !== id;
+        });
+        // Suppresion de la tâche en base de données en passant par le service qui va faire une requête HTTP avec la méthode DELETE
+        this.dataTasksService.deleteTask(id).subscribe({
+          next: (taskDeleted) => {
+            console.log(`Tâche supprimée `, taskDeleted);
+          },
+          error: (error) => {
+            console.error(`Problème pour supprimer la tâche dans todolist `);
+            // Remettre la tâche supprimée
+            this.tasks.push(savedTask);
+
+            // Informer l'utilisateur
+            this.errorMsg =
+              "La tâche n'a pas été supprimée en base de données.";
+            setTimeout(() => {
+              this.errorMsg = '';
+            }, 5000);
+          },
+        });
+      },
+      error: (error) => {
+        console.error(
+          `Erreur attrapée lors de la suppression de la tâche`,
+          error
         );
       },
     });
